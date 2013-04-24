@@ -1,4 +1,4 @@
-# ng-sites
+# ng-sites (In-Development)
 One-stop deployment of angularjs.org sites.
 
 ## Prerequisites
@@ -32,3 +32,6 @@ One-stop deployment of angularjs.org sites.
 ## TODO
 
   * Replace hard-coded path in fastcgi.sh
+  * Finish writing tests
+  * Support dynamic environment execution in tests (e.g. dev.*)
+  * Create grunt tasks to manage nginx process
