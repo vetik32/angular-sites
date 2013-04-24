@@ -14,23 +14,20 @@ module.exports = function (grunt) {
         }]
       }
     },
-    jasmine_node: {
-      specNameMatcher: ".spec", // load only specs containing specNameMatcher
-      projectRoot: "spec/",
-      requirejs: false,
-      forceExit: true,
-      jUnit: {
-        report: false,
-        savePath : "./build/reports/jasmine/",
-        useDotNotation: true,
-        consolidate: true
-      }
+    mochacli: {
+      options: {
+        require: ['expect.js'],
+        reporter: 'nyan',
+        bail: true,
+        timeout: 10000
+      },
+      all: ['test/*.js']
     }
   });
   
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-mocha-cli');
 
   grunt.registerTask('configure', ['replace']);
-  grunt.registerTask('test', ['jasmine_node'])
+  grunt.registerTask('test', ['mochacli'])
 };

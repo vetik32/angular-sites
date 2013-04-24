@@ -25,7 +25,11 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-replace": "~0.4.3",
-    "grunt-jasmine-node": "~0.1.0",
-    "jasmine-node": "~1.7.0"
+    "protractor": "git+ssh://git@github.com:jeffbcross/protractor.git",
+    "selenium-webdriver": "~2.32.1",
+    "grunt-mocha-cli": "~1.0.3",
+    "mocha": "~1.9.0",
+    "expect": "0.0.2",
+    "expect.js": "~0.2.0"
   }
 }
