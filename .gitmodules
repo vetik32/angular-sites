@@ -1,0 +1,12 @@
+[submodule "sites/code.angularjs.org"]
+	path = sites/code.angularjs.org
+	url = https://github.com/angular/code.angularjs.org.git
+[submodule "sites/builtwith.angularjs.org"]
+	path = sites/builtwith.angularjs.org
+	url = https://github.com/angular/builtwith.angularjs.org.git
+[submodule "sites/dashboard.angularjs.org"]
+	path = sites/dashboard.angularjs.org
+	url = https://github.com/angular/dashboard.angularjs.org.git
+[submodule "sites/angularjs.org"]
+	path = sites/angularjs.org
+	url = https://github.com/angular/angularjs.org.git
