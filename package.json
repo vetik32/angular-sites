@@ -24,6 +24,8 @@
   "gitHead": "59575cfbe7d73c477d3ad9b48ed0982fe170f82b",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-replace": "~0.4.3"
+    "grunt-replace": "~0.4.3",
+    "grunt-jasmine-node": "~0.1.0",
+    "jasmine-node": "~1.7.0"
   }
 }
