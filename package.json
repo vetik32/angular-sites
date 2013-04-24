@@ -1,0 +1,29 @@
+{
+  "name": "ng-sites",
+  "version": "0.0.0",
+  "description": "Management of angularjs.org site and subdomains.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jeffbcross/ng-sites.git"
+  },
+  "keywords": [
+    "angularjs",
+    "server",
+    "angularjs.org"
+  ],
+  "author": "jeffbcross",
+  "license": "Apache 2",
+  "readmeFilename": "README.md",
+  "gitHead": "59575cfbe7d73c477d3ad9b48ed0982fe170f82b",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-replace": "~0.4.3"
+  }
+}
