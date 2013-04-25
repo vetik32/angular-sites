@@ -7,5 +7,6 @@
 
 /logs/access.log
 /logs/error.log
+chromedriver.log
 
 *.pid
