@@ -10,7 +10,8 @@ var webdriver = require('selenium-webdriver')
         'javascriptEnabled': true
       }).build()
   , tractor
-  , HOST = 'http://angularjs.org';
+  , HOST = 'http://angularjs.org'
+  , request = require('request');
 
 tractor = protractor.wrapDriver(driver);
 
@@ -23,7 +24,22 @@ var queryDoc = function (query) {
 
 describe('Angularjs.org', function () {
   describe('Redirects', function () {
-
+    htaccess = require('../server/config/angularjs.org.htaccess.json');
+    if (htaccess && htaccess.redirects) {
+      Object.keys(htaccess.redirects).forEach(function (key) {
+        var rules = htaccess.redirects[key];
+        it('should redirect' + key + ' to ' + rules.dest, function (done) {
+          request(HOST + key, function (error, res) {
+            if (error) done(new Error(error));
+            expect(res.request.href).to.equal(rules.dest);
+            done();
+          });
+        });
+      });  
+    }
+    else {
+      done(new Error("Could not load htaccess"));
+    }
   });
   
   describe('Rewrites', function () {

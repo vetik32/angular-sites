@@ -18,7 +18,7 @@ One-stop deployment of angularjs.org sites.
     ## Setup
     $ git clone --recursive https://github.com/jeffbcross/ng-sites.git
     $ cd ng-sites/
-    $ npm i .
+    $ npm install .
     $ grunt configure
 
     ## Start server
@@ -35,4 +35,5 @@ One-stop deployment of angularjs.org sites.
   * Finish writing tests
   * Support dynamic environment execution in tests (e.g. dev.*)
   * Create grunt tasks to manage nginx process
+  * Create grunt task to check dependencies (php, nginx, selenium, chromedriver);
   * Reduce need for positional CSS selection in angularjs.org tests (e.g. :first-child, :nth-child)

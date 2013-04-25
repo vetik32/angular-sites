@@ -1,0 +1,12 @@
+{
+  "name": "grunt-contrib-htaccess-to-json",
+  "version": "0.0.0",
+  "description": "Grunt task to parse htaccess files into JSON",
+  "main": "task.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "jeffbcross",
+  "license": "Apache 2"
+}
