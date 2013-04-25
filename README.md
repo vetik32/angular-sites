@@ -35,3 +35,4 @@ One-stop deployment of angularjs.org sites.
   * Finish writing tests
   * Support dynamic environment execution in tests (e.g. dev.*)
   * Create grunt tasks to manage nginx process
+  * Reduce need for positional CSS selection in angularjs.org tests (e.g. :first-child, :nth-child)
