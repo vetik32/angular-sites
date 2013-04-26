@@ -23,8 +23,10 @@ module.exports = function (grunt) {
         bail: true,
         timeout: 10000
       },
-      all: ['test/*.js'],
-      code: ['test/code.angularjs.org.spec.js']
+      root: ['test/angularjs.org.spec.js'],
+      code: ['test/code.angularjs.org.spec.js'],
+      ci: ['test/ci.angularjs.org.spec.js'],
+      blog: ['test/blog.angularjs.org.spec.js']
     },
     ht2j: {
       paths: [{

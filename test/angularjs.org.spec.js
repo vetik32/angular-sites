@@ -1,37 +1,37 @@
-var webdriver = require('selenium-webdriver')
-  , expect = require('expect.js')
-  , protractor = require('protractor')
-  , driver = new webdriver.Builder().
-      usingServer('http://localhost:4444/wd/hub').
-      withCapabilities({
-        'browserName': 'chrome',
-        'version': '',
-        'platform': 'ANY',
-        'javascriptEnabled': true
-      }).build()
-  , tractor
-  , HOST = 'http://angularjs.org'
-  , request = require('request');
-
-tractor = protractor.wrapDriver(driver);
-
-driver.manage().timeouts().setScriptTimeout(10000);
-
-//Returns a Protractor/WebDriver element promise using CSS query strategy
-var queryDoc = function (query) {
-  return tractor.findElement(protractor.By.css(query));
-}
-
 describe('Angularjs.org', function () {
+  var webdriver = require('selenium-webdriver')
+    , expect = require('expect.js')
+    , protractor = require('protractor')
+    , driver = new webdriver.Builder().
+        usingServer('http://localhost:4444/wd/hub').
+        withCapabilities({
+          'browserName': 'chrome',
+          'version': '',
+          'platform': 'ANY',
+          'javascriptEnabled': true
+        }).build()
+    , tractor
+    , HOST = 'http://angularjs.org'
+    , request = require('request');
+
+  tractor = protractor.wrapDriver(driver);
+
+  driver.manage().timeouts().setScriptTimeout(10000);
+
+  //Returns a Protractor/WebDriver element promise using CSS query strategy
+  var queryDoc = function (query) {
+    return tractor.findElement(protractor.By.css(query));
+  }
+
   after(function (done) {
     driver.quit().then(function(){
       done();
     });
   });
 
-  describe('Redirects', function () {
+  /*describe('Redirects', function () {
     htaccess = require('../server/config/angularjs.org.htaccess.json');
-    if (!htaccess && htaccess.redirects) {
+    if (htaccess && htaccess.redirects) {
       Object.keys(htaccess.redirects).forEach(function (key) {
         var rules = htaccess.redirects[key];
         it('should redirect' + key + ' to ' + rules.dest, function (done) {
@@ -44,9 +44,9 @@ describe('Angularjs.org', function () {
       });  
     }
     else {
-      // return new Error("Could not load htaccess"));
+      return new Error("Could not load htaccess");
     }
-  });
+  });*/
   
   describe('Rewrites', function () {
 

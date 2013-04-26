@@ -1,4 +1,5 @@
-var webdriver = require('selenium-webdriver')
+describe('code.angularjs.org', function () {
+  var webdriver = require('selenium-webdriver')
   , expect = require('expect.js')
   , protractor = require('protractor')
   , driver = new webdriver.Builder().
@@ -13,8 +14,7 @@ var webdriver = require('selenium-webdriver')
   , HOST = 'http://code.angularjs.org'
   , request = require('request')
   , parseXML = require('xml2js').parseString;
-
-describe('code.angularjs.org', function () {
+  
   describe('Rewrites', function () {
     it('should provide angular js for the version specified at root url', function (done) {
       request(HOST + '/angular-0.10.0.js', function (err, res, body) {
