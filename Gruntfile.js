@@ -23,7 +23,8 @@ module.exports = function (grunt) {
         bail: true,
         timeout: 10000
       },
-      all: ['test/*.js']
+      all: ['test/*.js'],
+      code: ['test/code.angularjs.org.spec.js']
     },
     ht2j: {
       paths: [{
@@ -50,5 +51,5 @@ module.exports = function (grunt) {
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
 
   grunt.registerTask('configure', ['replace']);
-  grunt.registerTask('test', ['mochacli']);
+  grunt.registerMultiTask('test', ['mochacli']);
 };
