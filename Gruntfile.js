@@ -25,7 +25,7 @@ module.exports = function (grunt) {
       },
       all: ['test/*.js']
     },
-    htaccessToJSON: {
+    ht2j: {
       paths: [{
         output: 'server/config/angularjs.org.htaccess.json',
         input: 'sites/angularjs.org/.htaccess'
@@ -33,6 +33,14 @@ module.exports = function (grunt) {
       {
         output: 'server/config/code.angularjs.org.htaccess.json',
         input: 'sites/code.angularjs.org/.htaccess'
+      },
+      {
+        output: 'server/config/builtwith.angularjs.org.htaccess.json',
+        input: 'sites/builtwith.angularjs.org/.htaccess'
+      },
+      {
+        output: 'server/config/dashboard.angularjs.org.htaccess.json',
+        input: 'sites/dashboard.angularjs.org/.htaccess'
       }]
     }
   });
