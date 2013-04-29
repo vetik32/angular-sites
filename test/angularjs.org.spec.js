@@ -29,24 +29,23 @@ describe('Angularjs.org', function () {
     });
   });
 
-  /*describe('Redirects', function () {
+  describe('Redirects', function () {
     htaccess = require('../server/config/angularjs.org.htaccess.json');
     if (htaccess && htaccess.redirects) {
-      Object.keys(htaccess.redirects).forEach(function (key) {
-        var rules = htaccess.redirects[key];
-        it('should redirect' + key + ' to ' + rules.dest, function (done) {
-          request(HOST + key, function (error, res) {
+      htaccess.redirects.forEach(function (r) {
+        it('should redirect' + r.origin + ' to ' + r.dest, function (done) {
+          request(HOST + r.origin, function (error, res) {
             if (error) done(new Error(error));
-            expect(res.request.href).to.equal(rules.dest);
+            expect(res.request.href).to.equal(r.dest);
             done();
           });
         });
-      });  
+      });
     }
     else {
       return new Error("Could not load htaccess");
     }
-  });*/
+  });
   
   describe('Rewrites', function () {
 

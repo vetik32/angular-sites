@@ -25,6 +25,7 @@ module.exports = function (grunt) {
       },
       root: ['test/angularjs.org.spec.js'],
       code: ['test/code.angularjs.org.spec.js'],
+      docs: ['test/docs.angularjs.org.spec.js'],
       ci: ['test/ci.angularjs.org.spec.js'],
       blog: ['test/blog.angularjs.org.spec.js'],
       dashboard: ['test/dashboard.angularjs.org.spec.js'],

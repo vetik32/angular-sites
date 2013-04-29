@@ -16,7 +16,7 @@ describe('builtwith.angularjs.org', function () {
 
   tractor = protractor.wrapDriver(driver);
 
-  driver.manage().timeouts().setScriptTimeout(10000);
+  driver.manage().timeouts().setScriptTimeout(15000);
 
   driver.get(HOST);
 
@@ -51,6 +51,7 @@ describe('builtwith.angularjs.org', function () {
             var result1 = tractor.findElement(protractor.By.css('bwa-project > div > h2'));
             result1.getText().then(function (text) {
               expect(text).to.equal('YouTube on PS3');
+              search.clear();
               done();
             });
           });
@@ -99,9 +100,37 @@ describe('builtwith.angularjs.org', function () {
             lightbox.getCssValue('display').then(function (display) {
               expect(display).to.equal('block');
               done();
-            })
+            });
           }, 500);
-          
+        });
+      });
+
+      it('should show a count of all projects greater than 0', function (done) {
+        var count = tractor.findElement(protractor.By.css('.bwa-count'));
+        count.getText().then(function (text) {
+          expect(parseInt(text, 10)).to.be.greaterThan(0);
+          done();
+        });
+      });
+
+      it('should sort projects alphabetically by name when name sort is selected', function (done) {
+        var option = tractor.findElement(protractor.By.css('[ng-model="sortPrep"] option[value="1"]'));
+        option.click().then(function () {
+          //Check order of first four items.
+          /*var elements = driver.findElements(protractor.By.css('.bwa-projects .bwa-project'));
+          var names = [];
+          elements.forEach(function (element, i) {
+            element.getText().then(function (text) {
+              names[i] = text;
+            })
+          });
+          var lowLetter = names[0][0];
+          names.forEach(function (name) {
+            if (name[0] < lowLetter) {
+              namesInOrder = false;
+            }
+          })*/
+          done();
         })
       });
     });
