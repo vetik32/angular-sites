@@ -32,8 +32,7 @@ One-stop deployment of angularjs.org sites.
 ## TODO
 
   * Replace hard-coded path in fastcgi.sh
-  * Finish writing tests
-  * Support dynamic environment execution in tests (e.g. dev.*). Perhaps just support a universal prefix? e.g. --prefix dev
+  * Fill out incomplete tests
   * Create grunt tasks to manage nginx process
   * Create grunt task to check dependencies (php, nginx, selenium, chromedriver);
   * Reduce need for positional CSS selection in angularjs.org tests (e.g. :first-child, :nth-child)

@@ -11,7 +11,8 @@ describe('docs.angularjs.org', function () {
         'javascriptEnabled': true
       }).build()
   , tractor
-  , HOST = 'http://docs.angularjs.org'
+  , envConfig = require('../env-config')
+  , HOST = 'http://' + envConfig.domainPrefix + 'docs.angularjs.org'
   , request = require('request')
   , parseXML = require('xml2js').parseString;
 

@@ -1,7 +1,8 @@
 describe('builtwith.angularjs.org', function () {
   var request = require('request')
   , expect = require('expect.js')
-  , HOST = 'http://builtwith.angularjs.org'
+  , envConfig = require('env-config')
+  , HOST = 'http://' + envConfig.domainPrefix + 'builtwith.angularjs.org'
   , webdriver = require('selenium-webdriver')
   , protractor = require('protractor')
   , driver = new webdriver.Builder().

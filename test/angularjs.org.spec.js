@@ -11,7 +11,8 @@ describe('Angularjs.org', function () {
           'javascriptEnabled': true
         }).build()
     , tractor
-    , HOST = 'http://angularjs.org'
+    , envConfig = require('env-config')
+    , HOST = 'http://' + envConfig.domainPrefix + 'angularjs.org'
     , request = require('request');
 
   tractor = protractor.wrapDriver(driver);
