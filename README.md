@@ -20,6 +20,7 @@ One-stop deployment of angularjs.org sites.
     $ cd ng-sites/
     $ npm install .
     $ grunt configure
+    $ grunt ht2j
 
     ## Start server
     $ ./bin/fastcgi.sh
