@@ -3,7 +3,7 @@ One-stop deployment of angularjs.org sites.
 
 ## Prerequisites
 
- * Unixy environment (Mac OS, Linux, etc)
+ * *nix environment (Mac OS, Linux, etc)
  * [Selenium Web Server](https://code.google.com/p/selenium/downloads/list)
  * [chrome driver](https://code.google.com/p/chromedriver/downloads/list)
  * [nginx 1.3.16+](http://nginx.org)
