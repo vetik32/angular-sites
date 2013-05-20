@@ -58,5 +58,5 @@ module.exports = function (grunt) {
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
 
   grunt.registerTask('configure', ['replace']);
-  grunt.registerMultiTask('test', ['mochacli']);
+  grunt.registerTask('test', ['mochacli']);
 };

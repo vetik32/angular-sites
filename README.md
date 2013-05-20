@@ -19,20 +19,20 @@ One-stop deployment of angularjs.org sites.
     $ git clone --recursive https://github.com/jeffbcross/ng-sites.git
     $ cd ng-sites/
     $ npm install .
-    $ grunt configure [--subdomain <dev>] #for tests and hosts, translates to http://dev.docs.angularjs.org for example. Only applied to sites hosted on this instance, e.g. not blog. or ci.
+    $ sudo grunt configure [--subdomain <dev>] #for tests and hosts, translates to http://dev.docs.angularjs.org for example. Only applied to sites hosted on this instance, e.g. not blog. or ci.
     $ grunt ht2j
 
     ## Start server
-    $ ./bin/fastcgi.sh start
-    $ ./bin/start.sh #starts nginx
+    $ sudo ./bin/fastcgi.sh start
+    $ sudo ./bin/start.sh #starts nginx
     
     ## Start selenium server and run tests
     $ java -jar path/to/selenium-server-standalone.jar -Dwebdriver.chrome.driver=/path/to/chromedriver/binary
     $ grunt test
 
     ## Stop server
-    $ ./bin/fastcgi.sh stop
-    $ ./bin/stop.sh
+    $ sudo ./bin/fastcgi.sh stop
+    $ sudo ./bin/stop.sh
 
 ## TODO
 

@@ -11,7 +11,7 @@ describe('Angularjs.org', function () {
           'javascriptEnabled': true
         }).build()
     , tractor
-    , envConfig = require('env-config')
+    , envConfig = require('../server/config/env-config')
     , HOST = envConfig.urls.root
     , request = require('request');
 
