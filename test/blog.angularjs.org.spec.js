@@ -1,5 +1,5 @@
 var expect = require('expect.js')
-  , HOST = 'http://blog.angularjs.org'
+  , HOST = envConfig.urls.blog
   , request = require('request');
 
 describe('blog.angularjs.org', function () {

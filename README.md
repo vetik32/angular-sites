@@ -19,7 +19,7 @@ One-stop deployment of angularjs.org sites.
     $ git clone --recursive https://github.com/jeffbcross/ng-sites.git
     $ cd ng-sites/
     $ npm install .
-    $ grunt configure
+    $ grunt configure [--subdomain <dev>] #for tests and hosts, translates to http://dev.docs.angularjs.org for example. Only applied to sites hosted on this instance, e.g. not blog. or ci.
     $ grunt ht2j
 
     ## Start server

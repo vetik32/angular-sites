@@ -1,0 +1,11 @@
+{
+  "urls" : {
+    "root" : "http://@@subdomainangularjs.org",
+    "code" : "http://@@subdomaincode.angularjs.org",
+    "docs" : "http://@@subdomaindocs.angularjs.org",
+    "builtwith": "http://@@subdomainbuiltwith.angularjs.org",
+    "dashboard": "http://@@subdomaindashboard.angularjs.org",
+    "ci" : "http://ci.angularjs.org",
+    "blog" : "http://blog.angularjs.org"
+  }
+}

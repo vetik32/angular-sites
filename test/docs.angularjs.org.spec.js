@@ -12,7 +12,7 @@ describe('docs.angularjs.org', function () {
       }).build()
   , tractor
   , envConfig = require('../env-config')
-  , HOST = 'http://' + envConfig.domainPrefix + 'docs.angularjs.org'
+  , HOST = envConfig.urls.docs
   , request = require('request')
   , parseXML = require('xml2js').parseString;
 

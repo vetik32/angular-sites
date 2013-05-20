@@ -1,6 +1,6 @@
 var request = require('request')
   , envConfig = require('../env-config')
-  , HOST = 'http://' + envConfig.domainPrefix + 'dashboard.angularjs.org'
+  , HOST = envConfig.urls.dashboard
   , expect = require('expect.js');
 
 describe('dashboard.angularjs.org', function () {

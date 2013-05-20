@@ -12,7 +12,7 @@ describe('Angularjs.org', function () {
         }).build()
     , tractor
     , envConfig = require('env-config')
-    , HOST = 'http://' + envConfig.domainPrefix + 'angularjs.org'
+    , HOST = envConfig.urls.root
     , request = require('request');
 
   tractor = protractor.wrapDriver(driver);

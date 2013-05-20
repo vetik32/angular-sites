@@ -8,12 +8,13 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'pwd': process.cwd(),
-            'user': process.env.USER
+            'user': process.env.USER,
+            'subdomain' : process.argv[3] === '--subdomain' && process.argv[4] ? process.argv[4] + '.' : ''  
           },
           prefix: '@@'
         },
         files: [{
-          flatten: true, expand: true, src: ['server/sample/nginx.conf', 'server/sample/sites.conf', 'server/sample/fastcgi.conf'], dest: 'server/config/'
+          flatten: true, expand: true, src: ['server/sample/nginx.conf', 'server/sample/sites.conf', 'server/sample/fastcgi.conf', 'server/sample/env-config.json'], dest: 'server/config/'
         }]
       }
     },

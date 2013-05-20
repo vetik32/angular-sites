@@ -9,4 +9,6 @@
 /logs/error.log
 chromedriver.log
 
+env-config.json
+
 *.pid
