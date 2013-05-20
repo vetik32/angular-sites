@@ -23,7 +23,7 @@ One-stop deployment of angularjs.org sites.
     $ grunt ht2j
 
     ## Start server
-    $ ./bin/fastcgi.sh
+    $ ./bin/fastcgi.sh start
     $ nginx -c `pwd`/server/config/nginx.conf
     
     ## Start selenium server and run tests

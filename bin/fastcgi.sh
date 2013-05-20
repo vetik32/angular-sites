@@ -4,7 +4,7 @@ USER=`whoami`
 PHP_FCGI_CHILDREN=15
 PHP_FCGI_MAX_REQUESTS=1000
 
-PHP_CGI=`which php-cgi`
+PHP_CGI=`which php5-cgi`
 PHP_CGI_NAME=`basename $PHP_CGI`
 RETVAL=0
 

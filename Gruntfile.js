@@ -7,12 +7,13 @@ module.exports = function (grunt) {
       dist: {
         options: {
           variables: {
-            'pwd': process.cwd()
+            'pwd': process.cwd(),
+            'user': process.env.USER
           },
           prefix: '@@'
         },
         files: [{
-          flatten: true, expand: true, src: ['server/sample/nginx.conf', 'server/sample/sites.conf'], dest: 'server/config/'
+          flatten: true, expand: true, src: ['server/sample/nginx.conf', 'server/sample/sites.conf', 'server/sample/fastcgi.conf'], dest: 'server/config/'
         }]
       }
     },
