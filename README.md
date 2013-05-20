@@ -24,11 +24,15 @@ One-stop deployment of angularjs.org sites.
 
     ## Start server
     $ ./bin/fastcgi.sh start
-    $ nginx -c `pwd`/server/config/nginx.conf
+    $ ./bin/start.sh #starts nginx
     
     ## Start selenium server and run tests
     $ java -jar path/to/selenium-server-standalone.jar -Dwebdriver.chrome.driver=/path/to/chromedriver/binary
     $ grunt test
+
+    ## Stop server
+    $ ./bin/fastcgi.sh stop
+    $ ./bin/stop.sh
 
 ## TODO
 

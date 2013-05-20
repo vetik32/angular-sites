@@ -1,0 +1,1 @@
+sudo nginx -s stop -c `pwd`/server/config/nginx.conf
