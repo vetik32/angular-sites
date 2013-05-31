@@ -25,7 +25,7 @@ describe('code.angularjs.org', function () {
     });
 
     it('should rewrite docs.* to /snapshot/docs/*', function (done) {
-      request('http://docs.angularjs.org', function (err, res, body) {
+      request(envConfig.urls.docs, function (err, res, body) {
         expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
         done();
       });
