@@ -1,5 +1,5 @@
 var request = require('request')
-  , envConfig = require('../env-config')
+  , envConfig = require('../server/config/env-config')
   , HOST = envConfig.urls.dashboard
   , expect = require('expect.js');
 

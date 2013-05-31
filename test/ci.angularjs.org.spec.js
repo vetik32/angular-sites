@@ -1,5 +1,5 @@
 var request = require('request')
-  , HOST = envConfig.urls.ci
+  , HOST = require('../server/config/env-config').urls.ci
   , expect = require('expect.js');
 
 describe('Ci.AngularJS.org', function () {
