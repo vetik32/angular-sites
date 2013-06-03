@@ -1,10 +1,10 @@
 {
   "urls" : {
-    "root" : "http://@@subdomainangularjs.org",
-    "code" : "http://@@subdomaincode.angularjs.org",
-    "docs" : "http://@@subdomaindocs.angularjs.org",
-    "builtwith": "http://@@subdomainbuiltwith.angularjs.org",
-    "dashboard": "http://@@subdomaindashboard.angularjs.org",
+    "root" : "http://@@wwwServer",
+    "code" : "http://@@codeServer",
+    "docs" : "http://@@docsServer",
+    "builtwith": "http://@@builtwithServer",
+    "dashboard": "http://@@dashboardServer",
     "ci" : "http://ci.angularjs.org",
     "blog" : "http://blog.angularjs.org"
   }

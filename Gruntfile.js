@@ -1,16 +1,56 @@
 fs = require('fs');
 
+var environments = {
+  local: {
+    'wwwPort': '8000',
+    'builtwithPort' : '8001',
+    'docsPort': '8002',
+    'codePort': '8003',
+    'dashboardPort': '8004',
+    'wwwServer': 'localhost',
+    'builtwithServer': 'localhost',
+    'docsServer': 'localhost',
+    'codeServer': 'localhost',
+    'dashboardServer': 'localhost'
+  },
+  dev: {
+    wwwPort: '80',
+    builtwithPort : '80',
+    docsPort: '80',
+    codePort: '80',
+    dashboardPort: '80',
+    wwwServer: 'dev.angularjs.org',
+    builtwithServer: 'dev.builtwith.angularjs.org',
+    docsServer: 'dev.docs.angularjs.org',
+    codeServer: 'dev.code.angularjs.org',
+    dashboardServer: 'dev.dashboard.angularjs.org'
+  },
+  prod: {
+    wwwPort: '80',
+    builtwithPort : '80',
+    docsPort: '80',
+    codePort: '80',
+    dashboardPort: '80',
+    wwwServer: 'www.angularjs.org',
+    builtwithServer: 'builtwith.angularjs.org',
+    docsServer: 'docs.angularjs.org',
+    codeServer: 'code.angularjs.org',
+    dashboardServer: 'dashboard.angularjs.org'
+  }
+}
+
 module.exports = function (grunt) {
+  var env = environments[grunt.option('target')] || environments.local;
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     replace: {
       dist: {
         options: {
-          variables: {
-            'pwd': process.cwd(),
-            'user': process.env.USER,
-            'subdomain' : process.argv[3] === '--subdomain' && process.argv[4] ? process.argv[4] + '.' : ''  
-          },
+          variables: grunt.util._.extend(env, {
+            user: process.env.USER,
+            pwd: process.cwd()
+          }),
           prefix: '@@'
         },
         files: [{
