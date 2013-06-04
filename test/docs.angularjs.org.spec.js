@@ -93,7 +93,7 @@ describe('docs.angularjs.org', function () {
       tractor.get(HOST + '/tutorial');
       var introParagraph = queryCss('.content p');
       introParagraph.getText().then(function (text) {
-        expect(text).to.contain('A great way to get introduced to AngularJS is to work through this tutorial');
+        expect(text).to.contain('You will need Node.js');
         done();
       });
     });
@@ -153,13 +153,15 @@ describe('docs.angularjs.org', function () {
       });
     });
 
-    it('should load the Disqus comments', function (done) {
+    //TODO: Implement test for prod only.
+    /*it('should load the Disqus comments', function (done) {
+
       var disqusFrame = queryCss('#disqus iframe');
       disqusFrame.getSize().then(function (size) {  
         expect(size.height).to.be.greaterThan(10);
         done();
       });
-    });
+    });*/
 
     it('should show the functioning input directive example', function (done) {
       tractor.get(HOST + '/api/ng.directive:input');

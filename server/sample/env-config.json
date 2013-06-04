@@ -1,10 +1,10 @@
 {
   "urls" : {
-    "root" : "http://@@wwwServer",
-    "code" : "http://@@codeServer",
-    "docs" : "http://@@docsServer",
-    "builtwith": "http://@@builtwithServer",
-    "dashboard": "http://@@dashboardServer",
+    "root" : "http://@@wwwServer:@@wwwPort",
+    "code" : "http://@@codeServer:@@codePort",
+    "docs" : "http://@@docsServer:@@docsPort",
+    "builtwith": "http://@@builtwithServer:@@builtwithPort",
+    "dashboard": "http://@@dashboardServer:@@dashboardPort",
     "ci" : "http://ci.angularjs.org",
     "blog" : "http://blog.angularjs.org"
   }
