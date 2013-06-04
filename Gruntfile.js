@@ -31,7 +31,7 @@ var environments = {
     docsPort: '80',
     codePort: '80',
     dashboardPort: '80',
-    wwwServer: 'www.angularjs.org',
+    wwwServer: 'angularjs.org',
     builtwithServer: 'builtwith.angularjs.org',
     docsServer: 'docs.angularjs.org',
     codeServer: 'code.angularjs.org',
