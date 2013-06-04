@@ -17,7 +17,7 @@ One-stop deployment of angularjs.org sites.
 (this repo includes submodules of all angularjs.org sites to be served)
 
     ## Setup
-    $ git clone --recursive https://github.com/jeffbcross/ng-sites.git
+    $ git clone --recursive https://github.com/angular/angular-sites.git
     $ cd ng-sites/
     $ npm install .
     $ sudo grunt configure [--target=<dev | prod | local>] #default 'local', sets proper ports and domains for hosts. Only applied to sites hosted on this instance, e.g. not blog. or ci.
