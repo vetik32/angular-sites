@@ -44,6 +44,14 @@ module.exports = function (grunt) {
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    chmod: {
+      options: {
+        mode: '777',
+      },
+      snapshot: {
+        src: ['sites/code.angularjs.org/snapshot']
+      }
+    },
     replace: {
       dist: {
         options: {
@@ -95,8 +103,13 @@ module.exports = function (grunt) {
   
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-chmod');
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
 
-  grunt.registerTask('configure', ['replace']);
+  grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
   grunt.registerTask('test', ['mochacli']);
+
+  grunt.registerTask('make-snapshot', function () {
+    grunt.file.mkdir('sites/code.angularjs.org/snapshot');
+  });
 };
