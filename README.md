@@ -10,6 +10,7 @@ One-stop deployment of angularjs.org sites.
  * [node 0.8+](http://nodejs.org)
  * [php 5+](http://php.net/)
  * [wget](http://www.gnu.org/software/wget/)
+ * unzip
  * [grunt 0.4+](http://gruntjs.com) npm install -g grunt-cli
 
 ## Quickstart
