@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         mode: '777',
       },
       snapshot: {
-        src: ['sites/code.angularjs.org/snapshot']
+        src: ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org']
       }
     },
     replace: {
