@@ -109,7 +109,14 @@ describe('docs.angularjs.org', function () {
   });
 
   describe('Crawlability', function () {
-    //TODO: Implement tests
+    it('should return a partial when requesting /?_escaped_fragment_=/api/angular.bind', function (done) {
+      request(HOST + '/?_escaped_fragment_=/api/angular.bind', function (err, res, body) {
+        console.log(body);
+        expect(body).to.contain('Returns a function which calls function');
+        expect(body).to.contain('angular.bind')
+        done();
+      });
+    });
   });
 
   describe('App', function () {
