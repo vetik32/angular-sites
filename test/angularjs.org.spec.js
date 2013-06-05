@@ -30,6 +30,37 @@ describe('Angularjs.org', function () {
     });
   });
 
+  describe('Rewrites', function () {
+    it('should rewrite /edit to index.html', function (done) {
+      request(HOST + '/edit', function (err, res, body) {
+        expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        done();
+      });
+    });
+
+    it('should rewrite /edit/<number> to index.html', function (done) {
+      request(HOST + '/edit/1', function (err, res, body) {
+        expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        done();
+      });
+    });
+
+    it('should rewrite /list to index.html', function (done) {
+      request(HOST + '/list', function (err, res, body) {
+        expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        done();
+      });
+    });
+
+    it('should rewrite /new to index.html', function (done) {
+      request(HOST + '/new', function (err, res, body) {
+        expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        done();
+      });
+    });
+
+  });
+
   describe('Redirects', function () {
     htaccess = require('../server/config/angularjs.org.htaccess.json');
     if (htaccess && htaccess.redirects) {
@@ -46,10 +77,22 @@ describe('Angularjs.org', function () {
     else {
       return new Error("Could not load htaccess");
     }
-  });
-  
-  describe('Rewrites', function () {
 
+    it('should redirect /api to docs.angularjs.org', function (done) {
+      request(HOST + '/api', function (error, res) {
+        if (error) done(new Error(error));
+        expect(res.request.href).to.equal('http://docs.angularjs.org/api');
+        done();
+      });
+    });
+
+    it('should redirect /docs/api to docs.angularjs.org', function (done) {
+      request(HOST + '/docs/api', function (error, res) {
+        if (error) done(new Error(error));
+        expect(res.request.href).to.equal('http://docs.angularjs.org/api');
+        done();
+      });
+    });
   });
 
   describe('App', function () {
