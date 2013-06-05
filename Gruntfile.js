@@ -1,43 +1,44 @@
-fs = require('fs');
-
-var environments = {
-  local: {
-    'wwwPort': '8000',
-    'builtwithPort' : '8001',
-    'docsPort': '8002',
-    'codePort': '8003',
-    'dashboardPort': '8004',
-    'wwwServer': 'localhost',
-    'builtwithServer': 'localhost',
-    'docsServer': 'localhost',
-    'codeServer': 'localhost',
-    'dashboardServer': 'localhost'
-  },
-  dev: {
-    wwwPort: '80',
-    builtwithPort : '80',
-    docsPort: '80',
-    codePort: '80',
-    dashboardPort: '80',
-    wwwServer: 'dev.angularjs.org',
-    builtwithServer: 'dev.builtwith.angularjs.org',
-    docsServer: 'dev.docs.angularjs.org',
-    codeServer: 'dev.code.angularjs.org',
-    dashboardServer: 'dev.dashboard.angularjs.org'
-  },
-  prod: {
-    wwwPort: '80',
-    builtwithPort : '80',
-    docsPort: '80',
-    codePort: '80',
-    dashboardPort: '80',
-    wwwServer: 'angularjs.org',
-    builtwithServer: 'builtwith.angularjs.org',
-    docsServer: 'docs.angularjs.org',
-    codeServer: 'code.angularjs.org',
-    dashboardServer: 'dashboard.angularjs.org'
-  }
-}
+var fs = require('fs')
+  , forever = require('forever-monitor')
+  , server
+  , environments = {
+      local: {
+        'wwwPort': '8000',
+        'builtwithPort' : '8001',
+        'docsPort': '8002',
+        'codePort': '8003',
+        'dashboardPort': '8004',
+        'wwwServer': 'localhost',
+        'builtwithServer': 'localhost',
+        'docsServer': 'localhost',
+        'codeServer': 'localhost',
+        'dashboardServer': 'localhost'
+      },
+      dev: {
+        wwwPort: '80',
+        builtwithPort : '80',
+        docsPort: '80',
+        codePort: '80',
+        dashboardPort: '80',
+        wwwServer: 'dev.angularjs.org',
+        builtwithServer: 'dev.builtwith.angularjs.org',
+        docsServer: 'dev.docs.angularjs.org',
+        codeServer: 'dev.code.angularjs.org',
+        dashboardServer: 'dev.dashboard.angularjs.org'
+      },
+      prod: {
+        wwwPort: '80',
+        builtwithPort : '80',
+        docsPort: '80',
+        codePort: '80',
+        dashboardPort: '80',
+        wwwServer: 'angularjs.org',
+        builtwithServer: 'builtwith.angularjs.org',
+        docsServer: 'docs.angularjs.org',
+        codeServer: 'code.angularjs.org',
+        dashboardServer: 'dashboard.angularjs.org'
+      }
+    };
 
 module.exports = function (grunt) {
   var env = environments[grunt.option('target')] || environments.local;
@@ -98,6 +99,23 @@ module.exports = function (grunt) {
         output: 'server/config/dashboard.angularjs.org.htaccess.json',
         input: 'sites/dashboard.angularjs.org/.htaccess'
       }]
+    },
+    server: {
+      stop: {
+        options: {
+          command: 'stop'
+        }
+      },
+      start: {
+        options: {
+          command: 'start'
+        }
+      },
+      restart: {
+        options: {
+          command: 'restart'
+        }
+      }
     }
   });
   
@@ -112,4 +130,39 @@ module.exports = function (grunt) {
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
   });
+
+  /*
+  //No-op for now
+  grunt.registerMultiTask('server', function() {
+    var config = this.options();
+    
+    switch (config.command) {
+      case 'start':
+        server = forever.start(['nginx', '-c', process.cwd() + '/server/config/nginx.conf'], {
+          command: 'nginx',
+          killSignal: 'stop',
+          pidFile: 'nginx.pid',
+          uid: process.env.USER,
+          max: 10
+        });
+        break;
+
+      case 'stop':
+        forever.kill('nginx.pid', true, 'stop', function () {
+          grunt.log.writeln('killed the server');
+        });
+        break;
+
+      case 'restart':
+        if (!server || !server.stop) {
+          grunt.log.error('No server to restart');
+          break;
+        }
+
+        server.restart();
+        break;
+      default:
+        grunt.log.error("No command specified in config" + JSON.stringify(config));
+    }
+  });*/
 };
