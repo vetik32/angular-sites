@@ -95,8 +95,7 @@ describe('code.angularjs.org', function () {
     it('should render index.html for request to /snapshot/docs', function (done) {
       request(HOST + '/snapshot/docs', function (err, res, body) {
         expect(body).not.to.contain('Index of /');
-        expect(body).to.contain('API Reference');
-        expect(body).to.contain('AngularJS concepts');
+        expect(body).to.contain('AngularJS is what HTML would have been');
         done();
       });
     });
