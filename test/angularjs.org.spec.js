@@ -31,6 +31,13 @@ describe('Angularjs.org', function () {
   });
 
   describe('Rewrites', function () {
+    it('should execute greet.php', function (done) {
+      request(HOST + '/greet.php?name=jeff&callback=none', function (err, res, body) {
+        expect(body).not.to.contain("<?");
+        expect(body).to.contain('none ({"name":"jeff","salutation"');
+        done();
+      })
+    });
     it('should rewrite /edit to index.html', function (done) {
       request(HOST + '/edit', function (err, res, body) {
         expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
