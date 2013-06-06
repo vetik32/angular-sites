@@ -24,6 +24,13 @@ describe('code.angularjs.org', function () {
       });
     });
 
+    it('should rewrite wildcard API docs versions to the appropriate index.html', function (done) {
+      request(HOST + '/1.1.4/docs/api/ng.directive:ngAnimate', function (err, res, body) {
+        expect(body).to.contain('AngularJS is what HTML would have been');
+        done();
+      });
+    });
+
     it('should rewrite docs.* to /snapshot/docs/*', function (done) {
       request(envConfig.urls.docs, function (err, res, body) {
         expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
