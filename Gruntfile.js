@@ -115,6 +115,11 @@ module.exports = function (grunt) {
         options: {
           command: 'restart'
         }
+      },
+      test: {
+        options: {
+          command: 'test'
+        }
       }
     }
   });
@@ -189,6 +194,19 @@ module.exports = function (grunt) {
           }
           else {
             grunt.log.error('No server to restart');
+            done();
+          }
+        });
+        break;
+      case 'test':
+        testConfig(function (err, res, stdout) {
+          if (res) {
+            grunt.log.writeln(stdout);
+            grunt.log.writeln('Config passes test.');
+          }
+          else {
+            grunt.log.error("Test failed");
+            grunt.log.error(err);
             done();
           }
         });

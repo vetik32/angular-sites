@@ -24,6 +24,10 @@ This repo includes submodules of all angularjs.org sites to be served.
     (default 'local', sets proper ports and domains for hosts. Only applied to sites hosted on this instance, e.g. not blog. or ci.)
     $ grunt ht2j
 
+## Test server config
+
+    $ sudo grunt server:test
+
 ## Start server
     
     $ sudo ./bin/fastcgi.sh start
