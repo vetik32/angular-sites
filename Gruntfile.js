@@ -188,6 +188,7 @@ module.exports = function (grunt) {
       case 'restart':
         testConfig(function (err, res, stdout) {
           if (res) {
+            grunt.log.writeln('Sending reload signal to nginx');
             exec('sudo nginx -s reload -c' + process.cwd() + '/server/config/nginx.conf', function () {
               done();
             });

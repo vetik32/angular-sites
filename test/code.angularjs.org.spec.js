@@ -91,5 +91,14 @@ describe('code.angularjs.org', function () {
         done();
       });
     });
+
+    it('should render index.html for request to /snapshot/docs', function (done) {
+      request(HOST + '/snapshot/docs', function (err, res, body) {
+        expect(body).not.to.contain('Index of /');
+        expect(body).to.contain('API Reference');
+        expect(body).to.contain('AngularJS concepts');
+        done();
+      });
+    });
   });
 });
