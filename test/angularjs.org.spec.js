@@ -30,6 +30,15 @@ describe('Angularjs.org', function () {
     });
   });
 
+  describe('php', function () {
+    it('should not report errors from greet.php', function (done) {
+      request(HOST + '/greet.php', function (err, res, body) {
+        expect(body).not.to.contain('Undefined index');
+        done();
+      });
+    })
+  });
+
   describe('Rewrites', function () {
     it('should execute greet.php', function (done) {
       request(HOST + '/greet.php?name=jeff&callback=none', function (err, res, body) {
