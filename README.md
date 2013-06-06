@@ -1,4 +1,4 @@
-# ng-sites (In-Development)
+# Angular Sites
 One-stop deployment of angularjs.org sites.
 
 ## Prerequisites
@@ -13,28 +13,40 @@ One-stop deployment of angularjs.org sites.
  * unzip
  * [grunt 0.4+](http://gruntjs.com) npm install -g grunt-cli
 
-## Quickstart
+## Setup
 
-(this repo includes submodules of all angularjs.org sites to be served)
+This repo includes submodules of all angularjs.org sites to be served.
 
-    ## Setup
     $ git clone --recursive https://github.com/angular/angular-sites.git
     $ cd ng-sites/
     $ npm install .
-    $ sudo grunt configure [--target=<dev | prod | local>] #default 'local', sets proper ports and domains for hosts. Only applied to sites hosted on this instance, e.g. not blog. or ci.
+    $ sudo grunt configure [--target=<dev | prod | local>]
+    (default 'local', sets proper ports and domains for hosts. Only applied to sites hosted on this instance, e.g. not blog. or ci.)
     $ grunt ht2j
 
-    ## Start server
-    $ sudo ./bin/fastcgi.sh start
-    $ sudo ./bin/start.sh #starts nginx
+## Start server
     
-    ## Start selenium server and run tests
+    $ sudo ./bin/fastcgi.sh start
+    $ sudo grunt server:start #alias to sudo nginx -c path/to/conf
+    
+## Start selenium server and run tests
+
+__Note:__ When testing a remote environment locally, first run configure with the target environment set to the remote environment to be tested. E.g. sudo grunt configure --target=prod
+
     $ java -jar path/to/selenium-server-standalone.jar -Dwebdriver.chrome.driver=/path/to/chromedriver/binary
     $ grunt test
 
-    ## Stop server
+
+## Gracefully restart server
+
+Will keep old nginx process alive until done serving open connections, while spawning a new nginx process with updated config.
+
+    $ sudo grunt server:restart
+
+## Stop server
+
     $ sudo ./bin/fastcgi.sh stop
-    $ sudo ./bin/stop.sh
+    $ sudo grunt server:stop
 
 ## TODO
 

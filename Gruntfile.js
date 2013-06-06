@@ -1,5 +1,5 @@
 var fs = require('fs')
-  , forever = require('forever-monitor')
+  , exec = require('child_process').exec
   , server
   , environments = {
       local: {
@@ -131,38 +131,71 @@ module.exports = function (grunt) {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
   });
 
-  /*
-  //No-op for now
   grunt.registerMultiTask('server', function() {
-    var config = this.options();
+    var config = this.options()
+      , done = this.async();
+    
+    var testConfig = function (callback) {
+      grunt.log.writeln('Testing nginx configuration');
+      
+      exec('sudo nginx -t -c ' + process.cwd() + '/server/config/nginx.conf', function (error, stdout, stderr) {
+        stdout = stdout || stderr;
+        
+        if (stdout && stdout.indexOf('test is successful') && stdout.indexOf('syntax is ok')) {
+          callback(error, true, stdout);
+        }
+        else {
+          callback(error, false, stdout);  
+        }
+        
+      });
+    };
     
     switch (config.command) {
       case 'start':
-        server = forever.start(['nginx', '-c', process.cwd() + '/server/config/nginx.conf'], {
-          command: 'nginx',
-          killSignal: 'stop',
-          pidFile: 'nginx.pid',
-          uid: process.env.USER,
-          max: 10
+        grunt.log.writeln('Preparing to start server.');
+
+        testConfig(function (err, res, stdout) {
+          if (res) {
+            grunt.log.writeln(stdout);
+            grunt.log.writeln('Config passes test, starting server...');
+
+            exec('sudo nginx -c ' + process.cwd() + '/server/config/nginx.conf', function (err, stdout) {
+              grunt.log.writeln('Server started');
+              done();
+            });  
+          }
+          else {
+            grunt.log.error("Could not start server because of bad nginx configuration");
+            grunt.log.error(err);
+            grunt.log.write(stdout);
+            done();
+          }
         });
         break;
 
       case 'stop':
-        forever.kill('nginx.pid', true, 'stop', function () {
-          grunt.log.writeln('killed the server');
+        exec('sudo nginx -s stop -c ' + process.cwd() + '/server/config/nginx.conf', function () {
+          done();
         });
         break;
 
       case 'restart':
-        if (!server || !server.stop) {
-          grunt.log.error('No server to restart');
-          break;
-        }
-
-        server.restart();
+        testConfig(function (err, res, stdout) {
+          if (res) {
+            exec('sudo nginx -s reload -c' + process.cwd() + '/server/config/nginx.conf', function () {
+              done();
+            });
+          }
+          else {
+            grunt.log.error('No server to restart');
+            done();
+          }
+        });
         break;
+
       default:
         grunt.log.error("No command specified in config" + JSON.stringify(config));
     }
-  });*/
+  });
 };
