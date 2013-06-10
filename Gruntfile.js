@@ -1,6 +1,7 @@
 var fs = require('fs')
   , exec = require('child_process').exec
   , server
+  , seleniumStarter = require('./lib/grunt-selenium.js')
   , environments = {
       local: {
         'wwwPort': '8000',
@@ -50,7 +51,7 @@ module.exports = function (grunt) {
         mode: '777',
       },
       snapshot: {
-        src: ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org']
+        src: ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver']
       }
     },
     replace: {
@@ -130,10 +131,15 @@ module.exports = function (grunt) {
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
 
   grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
-  grunt.registerTask('test', ['mochacli']);
+  grunt.registerTask('e2etest', ['selenium', 'mochacli']);
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
+  });
+
+  grunt.registerTask('selenium', "Start selenium server to run end-to-end tests", function () {
+    var done = this.async();
+    seleniumStarter(done, null, grunt);
   });
 
   grunt.registerMultiTask('server', function() {
