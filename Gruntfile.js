@@ -131,7 +131,7 @@ module.exports = function (grunt) {
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
 
   grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
-  grunt.registerTask('e2etest', ['selenium', 'mochacli']);
+  grunt.registerTask('test', ['selenium', 'mochacli']);
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');

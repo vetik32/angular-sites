@@ -20,11 +20,12 @@ This repo includes submodules of all angularjs.org sites to be served.
     $ git clone --recursive https://github.com/angular/angular-sites.git
     $ cd ng-sites/
     $ npm install .
+    $ bower install .
     $ sudo grunt configure [--target=<dev | prod | local>]
     (default 'local', sets proper ports and domains for hosts. Only applied to sites hosted on this instance, e.g. not blog. or ci.)
     $ grunt ht2j
 
-## Test server config
+## Test nginx config
 
     $ sudo grunt server:test
 
@@ -37,9 +38,7 @@ This repo includes submodules of all angularjs.org sites to be served.
 
 __Note:__ When testing a remote environment locally, first run configure with the target environment set to the remote environment to be tested. E.g. sudo grunt configure --target=prod
 
-    $ java -jar path/to/selenium-server-standalone.jar -Dwebdriver.chrome.driver=/path/to/chromedriver/binary
     $ grunt test
-
 
 ## Gracefully restart server
 
