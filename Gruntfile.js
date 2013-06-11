@@ -70,7 +70,7 @@ module.exports = function (grunt) {
     mochacli: {
       options: {
         require: ['expect.js'],
-        reporter: 'nyan',
+        reporter: 'spec',
         bail: true,
         timeout: 10000
       },
