@@ -99,28 +99,6 @@ module.exports = function (grunt) {
         output: 'server/config/dashboard.angularjs.org.htaccess.json',
         input: 'sites/dashboard.angularjs.org/.htaccess'
       }]
-    },
-    server: {
-      stop: {
-        options: {
-          command: 'stop'
-        }
-      },
-      start: {
-        options: {
-          command: 'start'
-        }
-      },
-      restart: {
-        options: {
-          command: 'restart'
-        }
-      },
-      test: {
-        options: {
-          command: 'test'
-        }
-      }
     }
   });
   
@@ -141,6 +119,4 @@ module.exports = function (grunt) {
     var done = this.async();
     seleniumStarter(done, null, grunt);
   });
-
-  
 };
