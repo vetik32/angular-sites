@@ -107,9 +107,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-chmod');
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
   grunt.loadTasks('./lib/grunt-server');
-
   grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
+
   grunt.registerTask('test', ['selenium', 'mochacli']);
+
+  grunt.registerTask('start', ['nginx:start']);
+  grunt.registerTask('stop', ['nginx:stop']);
+  grunt.registerTask('reload', ['nginx:restart']);
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
