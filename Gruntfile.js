@@ -50,7 +50,7 @@ module.exports = function (grunt) {
         mode: '777',
       },
       snapshot: {
-        src: ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver']
+        src: process.env.USER === 'root' ? ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver'] : []
       }
     },
     replace: {
@@ -101,19 +101,6 @@ module.exports = function (grunt) {
       }]
     }
   });
-  
-  grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-mocha-cli');
-  grunt.loadNpmTasks('grunt-chmod');
-  grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
-  grunt.loadTasks('./lib/grunt-server');
-  grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
-
-  grunt.registerTask('test', ['selenium', 'mochacli']);
-
-  grunt.registerTask('start', ['nginx:start']);
-  grunt.registerTask('stop', ['nginx:stop']);
-  grunt.registerTask('reload', ['nginx:restart']);
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
@@ -123,4 +110,16 @@ module.exports = function (grunt) {
     var done = this.async();
     seleniumStarter(done, null, grunt);
   });
+  
+  grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-chmod');
+  grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
+  grunt.loadTasks('./lib/grunt-server');
+  
+  grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
+  grunt.registerTask('test', ['selenium', 'mochacli']);
+  grunt.registerTask('start', ['nginx:start']);
+  grunt.registerTask('stop', ['nginx:stop']);
+  grunt.registerTask('reload', ['nginx:restart']);
 };
