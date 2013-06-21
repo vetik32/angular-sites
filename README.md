@@ -6,6 +6,7 @@ One-stop deployment of angularjs.org sites.
  * *nix environment (Mac OS, Linux, etc)
  * [nginx 1.3.16+](http://nginx.org)
  * [node 0.8+](http://nodejs.org)
+ * [OpenSSL](http://www.openssl.org/)
  * [php 5+](http://php.net/)
  * [wget](http://www.gnu.org/software/wget/)
  * unzip

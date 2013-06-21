@@ -14,7 +14,15 @@ describe('docs.angularjs.org', function () {
   , envConfig = require('../server/config/env-config')
   , HOST = envConfig.urls.docs
   , request = require('request')
-  , parseXML = require('xml2js').parseString;
+  , parseXML = require('xml2js').parseString
+  , fs = require('fs');
+
+var catchPromiseErrors = function(done) {
+  webdriver.promise.controlFlow().
+    on('uncaughtException', function(e) {
+        done(e);
+    });
+};
 
   tractor = protractor.wrapDriver(driver);
 
@@ -124,6 +132,28 @@ describe('docs.angularjs.org', function () {
         done();
       });
     });
+
+    it('should not 404 for sitemap URLs', function (done) {
+      var sitemap = fs.readFileSync('./sites/code.angularjs.org/snapshot/docs/sitemap.xml').toString();
+      var queueCount = 0, finishedCount = 0;
+
+      parseXML(sitemap, function (err, parsed) {
+        parsed.urlset.url.forEach(function (url) {
+          var reqUrl = url.loc[0].replace('http://docs.angularjs.org', HOST);
+          queueCount++
+          request(reqUrl, function (err, res, body) {
+            finishedCount++;
+
+            expect(res.statusCode).to.equal(200);
+            expect(body).to.contain('API Reference');
+            
+            if (queueCount === finishedCount) {
+              done();
+            }
+          });
+        });
+      }); 
+    });   
   });
 
   describe('App', function () {
@@ -179,14 +209,18 @@ describe('docs.angularjs.org', function () {
 
     it('should show the functioning input directive example', function (done) {
       tractor.get(HOST + '/api/ng.directive:input');
+      // var nameInput = tractor.findElement(protractor.By.input('user.name'));
       var nameInput = queryCss('[ng-model="user.name"]');
       nameInput.click();
       nameInput.sendKeys('!!!');
-      var code = queryCss('.doc-example-live tt');
-      code.getText().then(function (text) {
-        expect(text).to.contain('guest!!!');
-        done();
-      });
+      nameInput.getAttribute('type').then(function (value) {
+        var code = queryCss('.doc-example-live tt');
+        code.getText().then(function (text) {
+          expect(text).to.contain('guest!!!');
+          done();
+        });
+      })
+      
     });
 
     it('should show the functioning radio directive example', function (done) {
