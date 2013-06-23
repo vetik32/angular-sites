@@ -116,7 +116,7 @@ var catchPromiseErrors = function(done) {
     });
   });
 
-  describe.only('Crawlability', function () {
+  describe('Crawlability', function () {
     it('should return a partial when requesting /?_escaped_fragment_=/api/angular.bind', function (done) {
       request(HOST + '/?_escaped_fragment_=/api/angular.bind', function (err, res, body) {
         expect(body).to.contain('Returns a function which calls function');
