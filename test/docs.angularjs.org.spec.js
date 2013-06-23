@@ -116,7 +116,7 @@ var catchPromiseErrors = function(done) {
     });
   });
 
-  describe('Crawlability', function () {
+  describe.only('Crawlability', function () {
     it('should return a partial when requesting /?_escaped_fragment_=/api/angular.bind', function (done) {
       request(HOST + '/?_escaped_fragment_=/api/angular.bind', function (err, res, body) {
         expect(body).to.contain('Returns a function which calls function');
@@ -129,6 +129,27 @@ var catchPromiseErrors = function(done) {
       request(HOST + '/?_escaped_fragment_=/api/ng.directive:ngMouseover', function (err, res, body) {
         expect(body).to.contain('Specify custom behavior on mouseover event.');
         expect(body).to.contain('ngMouseover')
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /api/ng.directive:ngHref?_escaped_fragment_', function (done) {
+      request(HOST + '/api/ng.directive:ngHref?_escaped_fragment_', function (err, res, body) {
+        expect(body).to.contain('Using Angular markup like');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /api/ng.directive:ngHref?_escaped_fragment_=', function (done) {
+      request(HOST + '/api/ng.directive:ngHref?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('Using Angular markup like');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /guide/overview?_escaped_fragment_=', function (done) {
+      request(HOST + '/guide/overview?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('AngularJS is a structural framework for dynamic web apps');
         done();
       });
     });
@@ -153,7 +174,7 @@ var catchPromiseErrors = function(done) {
           });
         });
       }); 
-    });   
+    });
   });
 
   describe('App', function () {
