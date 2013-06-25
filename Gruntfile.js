@@ -72,7 +72,7 @@ module.exports = function (grunt) {
         require: ['expect.js'],
         reporter: 'spec',
         bail: true,
-        timeout: 10000
+        timeout: 16000
       },
       root: ['test/angularjs.org.spec.js'],
       code: ['test/code.angularjs.org.spec.js'],

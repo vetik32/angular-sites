@@ -154,6 +154,41 @@ var catchPromiseErrors = function(done) {
       });
     });
 
+    it('should return a partial when requesting /', function (done) {
+      request(HOST + '?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('Use the API Reference documentation when you need more information');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /guide?_escaped_fragment_=', function (done) {
+      request(HOST + '/guide?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('Welcome to the angular Developer Guide.');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /guide/?_escaped_fragment_=', function (done) {
+      request(HOST + '/guide/?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('Welcome to the angular Developer Guide.');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /cookbook/?_escaped_fragment_=', function (done) {
+      request(HOST + '/cookbook/?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('Welcome to the Angular cookbook.');
+        done();
+      });
+    });
+
+    it('should return a partial when requesting /tutorial/?_escaped_fragment_=', function (done) {
+      request(HOST + '/tutorial/?_escaped_fragment_=', function (err, res, body) {
+        expect(body).to.contain('A great way to get introduced to AngularJS is to work through this tutorial');
+        done();
+      });
+    });
+
     it('should not 404 for sitemap URLs', function (done) {
       var sitemap = fs.readFileSync('./sites/code.angularjs.org/snapshot/docs/sitemap.xml').toString();
       var queueCount = 0, finishedCount = 0;
