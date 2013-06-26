@@ -4,7 +4,8 @@ One-stop deployment of angularjs.org sites.
 ## Prerequisites
 
  * *nix environment (Mac OS, Linux, etc)
- * [nginx 1.3.16+](http://nginx.org)  - compile with --add-module=/path/to/echo-nginx-module (in components/)
+ * [nginx echo module]
+ * [nginx 1.3.16+](http://nginx.org)
  * [node 0.8+](http://nodejs.org)
  * [OpenSSL](http://www.openssl.org/)
  * [php 5+](http://php.net/)
@@ -64,6 +65,19 @@ The access and error logs are generated within each site's nginx config, and are
         compress
         sharedscripts
     }
+
+## Compiling Nginx
+
+Because we're using the echo-nginx-module (installed via bower), nginx must be compiled manually. Using a standard distribution of nginx will cause the server to fail. After downloading the nginx source, and running bower install in this project's root directory, run the following commands:
+
+    $ cd <nginx-source>/
+    $ ./configure --add-module=/<project-root>/components/echo-nginx-module
+    $ sudo make
+    $ sudo make install
+
+And then check that nginx was installed with the correct dependency:
+
+    $ nginx -V //Output should include "echo-nginx-module"
 
 ## TODO
 
