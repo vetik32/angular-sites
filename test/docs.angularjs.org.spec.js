@@ -189,6 +189,13 @@ var catchPromiseErrors = function(done) {
       });
     });
 
+    it('should return a 404 status code for bogus _escaped_fragment_ urls', function (done) {
+      request(HOST + '/misc/tutorial/api/guide/misc/misc/%7B%7Bmodule.url%7D%7D?_escaped_fragment_=', function (err, res, body) {
+        expect(res.statusCode).to.equal(404);
+        done();
+      });
+    });
+
     it('should not 404 for sitemap URLs', function (done) {
       var sitemap = fs.readFileSync('./sites/code.angularjs.org/snapshot/docs/sitemap.xml').toString();
       var queueCount = 0, finishedCount = 0;
