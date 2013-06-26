@@ -9,6 +9,7 @@ One-stop deployment of angularjs.org sites.
  * [OpenSSL](http://www.openssl.org/)
  * [php 5+](http://php.net/)
  * [pcre](http://www.pcre.org/)
+ * [zlib]
  * [wget](http://www.gnu.org/software/wget/)
  * unzip
  * [grunt 0.4+](http://gruntjs.com) npm install -g grunt-cli
