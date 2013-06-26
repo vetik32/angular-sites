@@ -133,6 +133,32 @@ var catchPromiseErrors = function(done) {
       });
     });
 
+    describe('_escaped_fragment_ Title Tags', function () {
+      it('should return an appropriate title when path contains : ', function (done) {
+        request(HOST + '?_escaped_fragment_=/api/ng.directive:ngRepeat', function (err, res, body) {
+          var title = /<title>(.*)<\/title>/.exec(body)[1];
+          expect(title).to.contain('AngularJS Documentation for ngRepeat');
+          done();
+        });
+      });
+
+      it('should return an appropriate title when path contains . ', function (done) {
+        request(HOST + '?_escaped_fragment_=/api/ng.$rootScope.Scope‎', function (err, res, body) {
+          var title = /<title>(.*)<\/title>/.exec(body)[1];
+          expect(title).to.contain('AngularJS Documentation for Scope');
+          done();
+        });
+      });
+
+      it('should return an appropriate title when path contains no special characters', function (done) {
+        request(HOST + '?_escaped_fragment_=/api/ngSanitize', function (err, res, body) {
+          var title = /<title>(.*)<\/title>/.exec(body)[1];
+          expect(title).to.contain('AngularJS Documentation for ngSanitize');
+          done();
+        });
+      });
+    })    
+
     it('should return a partial when requesting /api/ng.directive:ngHref?_escaped_fragment_', function (done) {
       request(HOST + '/api/ng.directive:ngHref?_escaped_fragment_', function (err, res, body) {
         expect(body).to.contain('Using Angular markup like');
