@@ -143,7 +143,7 @@ var catchPromiseErrors = function(done) {
       });
 
       it('should return an appropriate title when path contains . ', function (done) {
-        request(HOST + '?_escaped_fragment_=/api/ng.$rootScope.Scope‎', function (err, res, body) {
+        request(HOST + '/?_escaped_fragment_=/api/ng.$rootScope.Scope', function (err, res, body) {
           var title = /<title>(.*)<\/title>/.exec(body)[1];
           expect(title).to.contain('AngularJS Documentation for Scope');
           done();
