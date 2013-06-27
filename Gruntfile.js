@@ -63,7 +63,16 @@ module.exports = function (grunt) {
           prefix: '@@'
         },
         files: [{
-          flatten: true, expand: true, src: ['server/sample/nginx.conf', 'server/sample/sites.conf', 'server/sample/fastcgi.conf', 'server/sample/env-config.json'], dest: 'server/config/'
+          flatten: true, expand: true, src: [
+            'server/sample/nginx.conf',
+            'server/sample/builtwith.conf',
+            'server/sample/code.conf',
+            'server/sample/dashboard.conf',
+            'server/sample/docs.conf',
+            'server/sample/www.conf',
+            'server/sample/fastcgi.conf',
+            'server/sample/env-config.json'
+          ], dest: 'server/config/'
         }]
       }
     },
