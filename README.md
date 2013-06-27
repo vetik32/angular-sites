@@ -53,7 +53,7 @@ Will keep old nginx process alive until done serving open connections, while spa
     $ sudo grunt server:stop
 
 ## Managing Logs
-The access and error logs are generated within each site's nginx config, and are kept in logs/. It's recommended to use the logrotate utility to keep a short history of logs and to compress them. In the current production environment, the following configuration is provided in /etc/logrotate.d/nginx:
+The access and error logs are generated within each site's nginx config, and are kept in logs/. It's recommended to use the logrotate utility to keep a short history of logs and to compress them. In the current production environment, the following configuration is provided in /etc/logrotate.d/nginx (replace /var/angular-sites with the actual path):
 
     /var/angular-sites/logs/*.log {
         daily
@@ -64,7 +64,17 @@ The access and error logs are generated within each site's nginx config, and are
         dateformat -%Y-%m-%d
         compress
         sharedscripts
+        postrotate
+                [ ! -f /var/angular-sites/nginx.pid ] || kill -USR1 `cat /var/angular-sites/nginx.pid`
+        endscript
     }
+
+
+You will also need to schedule cron to execute logrotate with this configuration once a day.
+    
+    $ sudo vi /etc/crontab
+    0 01    * * *   root    /usr/sbin/logrotate /etc/logrotate.d/nginx > /dev/null 2>&1
+
 
 ## Compiling Nginx
 
@@ -78,7 +88,3 @@ Because we're using the echo-nginx-module (installed via bower), nginx must be c
 And then check that nginx was installed with the correct dependency:
 
     $ nginx -V //Output should include "echo-nginx-module"
-
-## TODO
-
-  * Reduce need for positional CSS selection in angularjs.org tests (e.g. :first-child, :nth-child)
