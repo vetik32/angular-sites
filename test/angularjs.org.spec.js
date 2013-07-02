@@ -107,40 +107,24 @@ describe('Angularjs.org', function () {
     describe('Download', function () {
       var stableVersion, cdnInput;
 
-      beforeEach(function () {
+      beforeEach(function (done) {
         var downloadBtn = queryDoc('.hero-unit .btn-primary'), done;
-
-        runs(function () {
-          downloadBtn.click().then(function () {
-            setTimeout(function () {
-              cdnInput = tractor.findElement(protractor.By.input('cdnURL'));
-              cdnInput.getAttribute('value').then(function (text) {
-                stableVersion = text.split('/').splice(-2,1)[0];
-                done = true;
-              });
-            }, 500);
-          });
-        });
-
-        waitsFor(function () {
-          return done;
-        }, "modal to be opened", 5000);
-      });
-
-      afterEach(function () {
-        var display = true;
-
-        runs(function () {
-          var closeBtn = queryDoc("#downloadModal .close");
-          closeBtn.click();
+        downloadBtn.click().then(function () {
           setTimeout(function () {
-            display = false;
+            cdnInput = tractor.findElement(protractor.By.input('cdnURL'));
+            cdnInput.getAttribute('value').then(function (text) {
+              stableVersion = text.split('/').splice(-2,1)[0];
+              done();
+            });
           }, 500);
         });
+      }, 5000);
 
-        waitsFor(function () {
-          return !display;
-        }, "display to be false", 500);
+      afterEach(function (done) {
+        queryDoc("#downloadModal .close").click();
+        setTimeout(function () {
+          done();
+        }, 500);
       });
 
       it('should open a modal prompting for download configuration', function (done) { 
@@ -151,23 +135,21 @@ describe('Angularjs.org', function () {
       });
 
       it('should change the CDN url based on user selection of stable or unstable', function (done) {
-        runs(function () {
-          var unstableButton = queryDoc("#redPill");
-          unstableButton.click().then(function () {
+        var unstableButton = queryDoc("#redPill");
+        unstableButton.click().then(function () {
+          
+          cdnInput.getAttribute('value').then(function (text) {
+            unstableVersion = text.split('/').splice(-2,1)[0];
             
-            cdnInput.getAttribute('value').then(function (text) {
-              unstableVersion = text.split('/').splice(-2,1)[0];
-              
-              for (i = 0; i < unstableVersion.split('.').length; i++) {
-                if (unstableVersion.split('.')[i] > stableVersion.split('.')[i]) {
-                  okay = true;
-                  break;
-                }
+            for (i = 0; i < unstableVersion.split('.').length; i++) {
+              if (unstableVersion.split('.')[i] > stableVersion.split('.')[i]) {
+                okay = true;
+                break;
               }
+            }
 
-              expect(okay).toBe(true);
-              done();
-            });
+            expect(okay).toBe(true);
+            done();
           });
         });
       });

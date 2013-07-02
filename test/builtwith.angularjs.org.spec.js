@@ -5,6 +5,14 @@ describe('builtwith.angularjs.org', function () {
   , protractor = require('protractor')
   , tractor = protractor.getInstance();
 
+  var _beforeAll;
+  beforeEach(function () {
+    if (_beforeAll) return;
+    _beforeAll = true;
+
+    tractor.get(HOST);
+  });
+
   describe('Rewrite', function () {
     it('should rewrite /project/X to index.html', function (done) {
       request(HOST + '/project/YouTube-on-PS3', function (err, res, body) {
@@ -16,7 +24,6 @@ describe('builtwith.angularjs.org', function () {
   });
 
   describe('App', function () {
-    tractor.get(HOST);
     describe('Homepage', function () {
       it('should attach a scope to <body>', function (done) {
         var body = tractor.findElement(protractor.By.css('body.ng-scope'));
