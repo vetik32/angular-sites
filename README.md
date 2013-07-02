@@ -39,7 +39,8 @@ This repo includes submodules of all angularjs.org sites to be served.
 
 __Note:__ When testing a remote environment locally, first run configure with the target environment set to the remote environment to be tested. E.g. sudo grunt configure --target=prod
 
-    $ grunt test
+    $ grunt selenium
+    $ ./node_modules/.bin/protractor protractorConf.js
 
 ## Gracefully restart server
 

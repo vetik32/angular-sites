@@ -76,21 +76,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    mochacli: {
-      options: {
-        require: ['expect.js'],
-        reporter: 'spec',
-        bail: true,
-        timeout: 16000
-      },
-      root: ['test/angularjs.org.spec.js'],
-      code: ['test/code.angularjs.org.spec.js'],
-      docs: ['test/docs.angularjs.org.spec.js'],
-      ci: ['test/ci.angularjs.org.spec.js'],
-      blog: ['test/blog.angularjs.org.spec.js'],
-      dashboard: ['test/dashboard.angularjs.org.spec.js'],
-      builtwith: ['test/builtwith.angularjs.org.spec.js']
-    },
     ht2j: {
       paths: [{
         output: 'server/config/angularjs.org.htaccess.json',
@@ -121,13 +106,11 @@ module.exports = function (grunt) {
   });
   
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-chmod');
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
   grunt.loadTasks('./lib/grunt-server');
   
   grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
-  grunt.registerTask('test', ['selenium', 'mochacli']);
   grunt.registerTask('start', ['nginx:start']);
   grunt.registerTask('stop', ['nginx:stop']);
   grunt.registerTask('reload', ['nginx:restart']);
