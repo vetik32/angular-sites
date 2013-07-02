@@ -1,7 +1,5 @@
 describe('code.angularjs.org', function () {
   var webdriver = require('selenium-webdriver')
-  , expect = require('expect.js')
-  , protractor = require('protractor')
   , driver = new webdriver.Builder().
       usingServer('http://localhost:4444/wd/hub').
       withCapabilities({
@@ -10,7 +8,6 @@ describe('code.angularjs.org', function () {
         'platform': 'ANY',
         'javascriptEnabled': true
       }).build()
-  , tractor
   , envConfig = require('../server/config/env-config')
   , HOST = envConfig.urls.code
   , request = require('request')
@@ -19,21 +16,21 @@ describe('code.angularjs.org', function () {
   describe('Rewrites', function () {
     it('should provide angular js for the version specified at root url', function (done) {
       request(HOST + '/angular-0.10.0.js', function (err, res, body) {
-        expect(body).to.contain('AngularJS v0.10.0');
+        expect(body).toContain('AngularJS v0.10.0');
         done();
       });
     });
 
     it('should rewrite wildcard API docs versions to the appropriate index.html', function (done) {
       request(HOST + '/1.1.4/docs/api/ng.directive:ngAnimate', function (err, res, body) {
-        expect(body).to.contain('AngularJS is what HTML would have been');
+        expect(body).toContain('AngularJS is what HTML would have been');
         done();
       });
     });
 
     it('should rewrite docs.* to /snapshot/docs/*', function (done) {
       request(envConfig.urls.docs, function (err, res, body) {
-        expect(body).to.contain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        expect(body).toContain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
         done();
       });
     });
@@ -42,9 +39,9 @@ describe('code.angularjs.org', function () {
   describe('Git Update', function () {
     it('should fetch the latest from github when hitting /gitFetchSite.php', function (done) {
       request(HOST + '/gitFetchSite.php', function (err, res, body) {
-        expect(body).to.contain('commit');
-        expect(body).to.contain('Author:');
-        expect(body).to.contain('Date:');
+        expect(body).toContain('commit');
+        expect(body).toContain('Author:');
+        expect(body).toContain('Date:');
         done();
       });
     });
@@ -58,10 +55,10 @@ describe('code.angularjs.org', function () {
           var latest = result.feed.entry[0];
           var commitPattern = /(?!Commit)\/.+$/;
           var commit = commitPattern.exec(latest.id)[0].replace('/','');
-          expect(commit).to.be.ok();
+          expect(commit).toBeTruthy();
 
           request(HOST + '/gitFetchSite.log', function (err, res, body) {
-            expect(body).to.contain(commit);
+            expect(body).toContain(commit);
             done();
           });
         });
@@ -71,39 +68,35 @@ describe('code.angularjs.org', function () {
 
   describe('Directory Listing', function () {
     var link;
-    before(function (done) {
+    beforeEach(function (done) {
       driver.get(HOST);
       done();
-    });
-
-    after(function (done) {
-      driver.quit().then(function () {
-        done();  
-      });
     });
 
     it('should show a list of files when requesting the root', function (done) {
       link = driver.findElement(webdriver.By.css('[href="0.9.0/"]'));
       link.getText().then(function (text) {
-        expect(text).to.equal('0.9.0/');
+        expect(text).toEqual('0.9.0/');
         done();
       });
     });
 
     it('should navigate to a directory for a code version', function (done) {
       driver.get(HOST + '/0.9.0/');
-      var body = driver.findElement(protractor.By.tagName('body'));
+      var body = driver.findElement(webdriver.By.tagName('body'));
       body.getText().then(function (text) {
-        expect(text).to.contain('angular-0.9.0.js');
+        expect(text).toContain('angular-0.9.0.js');
         done();
       });
     });
 
     it('should render index.html for request to /snapshot/docs', function (done) {
       request(HOST + '/snapshot/docs', function (err, res, body) {
-        expect(body).not.to.contain('Index of /');
-        expect(body).to.contain('AngularJS is what HTML would have been');
-        done();
+        expect(body).not.toContain('Index of /');
+        expect(body).toContain('AngularJS is what HTML would have been');
+        driver.quit().then(function () {
+          done();  
+        });
       });
     });
   });
