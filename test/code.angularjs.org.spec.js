@@ -36,6 +36,13 @@ describe('code.angularjs.org', function () {
         done();
       });
     });
+
+    it('should return the latest docs when requesting /snapshot/docs/api', function (done) {
+      request(HOST + '/snapshot/docs/api', function (err, res, body) { 
+        expect(body).toContain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
+        done();
+      })
+    });
   });
 
   describe('Git Update', function () {
