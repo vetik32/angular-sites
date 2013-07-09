@@ -1,17 +1,10 @@
 describe('code.angularjs.org', function () {
-  var webdriver = require('selenium-webdriver')
-  , driver = new webdriver.Builder().
-      usingServer('http://localhost:4444/wd/hub').
-      withCapabilities({
-        'browserName': 'chrome',
-        'version': '',
-        'platform': 'ANY',
-        'javascriptEnabled': true
-      }).build()
-  , envConfig = require('../server/config/env-config')
-  , HOST = envConfig.urls.code
-  , request = require('request')
-  , parseXML = require('xml2js').parseString;
+  var protractor = require('protractor')
+    , tractor = protractor.getInstance()
+    , envConfig = require('../server/config/env-config')
+    , HOST = envConfig.urls.code
+    , request = require('request')
+    , parseXML = require('xml2js').parseString;
   
   describe('Rewrites', function () {
     it('should provide angular js for the version specified at root url', function (done) {
@@ -27,6 +20,15 @@ describe('code.angularjs.org', function () {
         done();
       });
     });
+
+    it('should render the index when requesting the root of /version/docs', function (done) {
+      tractor.get(HOST + '/1.1.4/docs/');
+      var version = tractor.findElement(protractor.By.css('a#version'));
+      version.getText().then(function (text) {
+        expect(text).toEqual('v1.1.4 quantum-manipulation');
+        done();
+      });
+    })
 
     it('should rewrite docs.* to /snapshot/docs/*', function (done) {
       request(envConfig.urls.docs, function (err, res, body) {
@@ -68,24 +70,17 @@ describe('code.angularjs.org', function () {
 
   describe('Directory Listing', function () {
     var link;
-    beforeEach(function (done) {
-      driver.get(HOST);
-      done();
-    });
 
     it('should show a list of files when requesting the root', function (done) {
-      link = driver.findElement(webdriver.By.css('[href="0.9.0/"]'));
-      link.getText().then(function (text) {
-        expect(text).toEqual('0.9.0/');
+      request(HOST, function (err, res, body) {
+        expect(body).toContain('href="0.9.0');
         done();
       });
     });
 
     it('should navigate to a directory for a code version', function (done) {
-      driver.get(HOST + '/0.9.0/');
-      var body = driver.findElement(webdriver.By.tagName('body'));
-      body.getText().then(function (text) {
-        expect(text).toContain('angular-0.9.0.js');
+      request(HOST + '/0.9.0/', function (err, res, body) {
+        expect(body).toContain('angular-0.9.0.js');
         done();
       });
     });
@@ -94,9 +89,7 @@ describe('code.angularjs.org', function () {
       request(HOST + '/snapshot/docs', function (err, res, body) {
         expect(body).not.toContain('Index of /');
         expect(body).toContain('AngularJS is what HTML would have been');
-        driver.quit().then(function () {
-          done();  
-        });
+        done();
       });
     });
   });
