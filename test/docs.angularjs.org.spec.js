@@ -95,8 +95,35 @@ describe('docs.angularjs.org', function () {
       });
     });
   });
-
+  describe('Bad Deep Urls', function () {
+    it('should return 404 for /api/api', function (done) {
+      request(HOST + '/api/api', function (err, res, body) {
+        expect(res.statusCode).toEqual(404);
+        done();
+      });
+    });
+    it('should return 404 for /api/tutorial', function (done) {
+      request(HOST + '/api/tutorial', function (err, res, body) {
+        expect(res.statusCode).toEqual(404);
+        done();
+      });
+    });
+    it('should return 404 for /tutorial/guide', function (done) {
+      request(HOST + '/tutorial/guide', function (err, res, body) {
+        expect(res.statusCode).toEqual(404);
+        done();
+      });
+    });
+    it('should return 404 for /misc/tutorial', function (done) {
+      request(HOST + '/misc/tutorial', function (err, res, body) {
+        expect(res.statusCode).toEqual(404);
+        done();
+      });
+    });
+  })
+  
   describe('Crawlability', function () {
+
     it('should return a partial when requesting /?_escaped_fragment_=/api/angular.bind', function (done) {
       request(HOST + '/?_escaped_fragment_=/api/angular.bind', function (err, res, body) {
         expect(body).toContain('Returns a function which calls function');
