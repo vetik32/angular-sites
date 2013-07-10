@@ -237,25 +237,26 @@ describe('docs.angularjs.org', function () {
     });
 
     it('should not 404 for sitemap URLs', function (done) {
-      var sitemap = fs.readFileSync('./sites/code.angularjs.org/snapshot/docs/sitemap.xml').toString();
-      var queueCount = 0, finishedCount = 0;
+      request(HOST + '/sitemap.xml', function (err, res, sitemap) {
+        var queueCount = 0, finishedCount = 0;
 
-      parseXML(sitemap, function (err, parsed) {
-        parsed.urlset.url.forEach(function (url) {
-          var reqUrl = url.loc[0].replace('http://docs.angularjs.org', HOST);
-          queueCount++
-          request(reqUrl, function (err, res, body) {
-            finishedCount++;
+        parseXML(sitemap, function (err, parsed) {
+          parsed.urlset.url.forEach(function (url) {
+            var reqUrl = url.loc[0].replace('http://docs.angularjs.org', HOST);
+            queueCount++
+            request(reqUrl, function (err, res, body) {
+              finishedCount++;
 
-            expect(res.statusCode).toEqual(200);
-            expect(body).toContain('API Reference');
-            
-            if (queueCount === finishedCount) {
-              done();
-            }
+              expect(res.statusCode).toEqual(200);
+              expect(body).toContain('API Reference');
+              
+              if (queueCount === finishedCount) {
+                done();
+              }
+            });
           });
-        });
-      }); 
+        }); 
+      });
     });
   });
 
