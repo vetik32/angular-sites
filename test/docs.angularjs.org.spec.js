@@ -202,6 +202,13 @@ describe('docs.angularjs.org', function () {
       });
     });
 
+    it('should return a 404 status code for deep paths such as /tutorial/tutorial/api?_escaped_fragment_=', function (done) {
+      request(HOST + '/tutorial/tutorial/api?_escaped_fragment_=', function (err, res, body) {
+        expect(res.statusCode).toEqual(404);
+        done();
+      });
+    });
+
     it('should not 404 for sitemap URLs', function (done) {
       var sitemap = fs.readFileSync('./sites/code.angularjs.org/snapshot/docs/sitemap.xml').toString();
       var queueCount = 0, finishedCount = 0;
