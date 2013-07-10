@@ -1,6 +1,5 @@
 var fs = require('fs')
   , server
-  , seleniumStarter = require('./lib/grunt-selenium.js')
   , environments = {
       local: {
         'wwwPort': '8000',
@@ -98,11 +97,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
-  });
-
-  grunt.registerTask('selenium', "Start selenium server to run end-to-end tests", function () {
-    var done = this.async();
-    seleniumStarter(done, null, grunt);
   });
   
   grunt.loadNpmTasks('grunt-replace');

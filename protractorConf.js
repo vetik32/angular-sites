@@ -2,7 +2,10 @@
 exports.config = {
   // The address of a running selenium server. If this is specified,
   // seleniumServerJar and seleniumPort will be ignored.
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+  // seleniumAddress: 'http://localhost:4444/wd/hub',
+  seleniumServerJar: './components/selenium-server-standalone-2.33.0/index.jar',
+  seleniumPort: 4444,
+  chromeDriver: './components/chromedriver_mac_26.0.1383.0',
 
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
