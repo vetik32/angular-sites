@@ -94,6 +94,24 @@ describe('docs.angularjs.org', function () {
         done();
       });
     });
+
+    it('should rewrite /error to index.html', function (done) {
+      tractor.get(HOST + '/error');
+      var introParagraph = queryCss('.content p');
+      introParagraph.getText().then(function (text) {
+        expect(text).toContain('Use the Error Reference manual');
+        done();
+      });
+    });
+
+    it('should rewrite /error/ng:cpi to index.html', function (done) {
+      tractor.get(HOST + '/error/ng:cpi');
+      var errorPre = queryCss('.minerr-errmsg');
+      errorPre.getText().then(function (text) {
+        expect(text).toContain('Source and destination are identical.');
+        done();
+      });
+    });
   });
   describe('Bad Deep Urls', function () {
     it('should return 404 for /api/api', function (done) {

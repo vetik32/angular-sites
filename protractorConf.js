@@ -5,7 +5,10 @@ exports.config = {
   // seleniumAddress: 'http://localhost:4444/wd/hub',
   seleniumServerJar: './components/selenium-server-standalone-2.33.0/index.jar',
   seleniumPort: 4444,
-  chromeDriver: './components/chromedriver_mac_26.0.1383.0/chromedriver',
+  chromeDriver: (process.platform === 'darwin') ?
+    './components/chromedriver_mac_26.0.1383.0/chromedriver' :
+    './components/chromedriver_linux64_26.0.1383.0/chromedriver',
+
   seleniumArgs: [],
 
   // A base URL for your application under test. Calls to protractor.get()

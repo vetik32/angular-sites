@@ -1,9 +1,11 @@
 {
   "name": "angular-sites",
   "version": "0.0.0",
+  "directory": "components",
   "dependencies": {
     "selenium-server-standalone-2.33.0": "https://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar",
     "chromedriver_mac_26.0.1383.0": "https://chromedriver.googlecode.com/files/chromedriver_mac_26.0.1383.0.zip",
+    "chromedriver_linux64_26.0.1383.0": "https://chromedriver.googlecode.com/files/chromedriver_linux32_26.0.1383.0.zip",
     "echo-nginx-module": "https://github.com/agentzh/echo-nginx-module/archive/v0.45.zip"
   }
 }
