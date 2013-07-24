@@ -7,11 +7,14 @@ var fs = require('fs')
         'docsPort': '8002',
         'codePort': '8003',
         'dashboardPort': '8004',
+        'errorsPort': '8005',
         'wwwServer': 'localhost',
         'builtwithServer': 'localhost',
         'docsServer': 'localhost',
         'codeServer': 'localhost',
-        'dashboardServer': 'localhost'
+        'dashboardServer': 'localhost',
+        'errorsServer': 'localhost',
+        'docsPath': 'http://localhost:8002'
       },
       dev: {
         wwwPort: '80',
@@ -19,11 +22,14 @@ var fs = require('fs')
         docsPort: '80',
         codePort: '80',
         dashboardPort: '80',
+        errorsPort: '80',
         wwwServer: 'dev.angularjs.org',
         builtwithServer: 'dev.builtwith.angularjs.org',
         docsServer: 'dev.docs.angularjs.org',
         codeServer: 'dev.code.angularjs.org',
-        dashboardServer: 'dev.dashboard.angularjs.org'
+        dashboardServer: 'dev.dashboard.angularjs.org',
+        errorsServer: 'dev.errors.angularjs.org',
+        docsPath: 'http://dev.docs.angularjs.org'
       },
       prod: {
         wwwPort: '80',
@@ -31,11 +37,14 @@ var fs = require('fs')
         docsPort: '80',
         codePort: '80',
         dashboardPort: '80',
+        errorsPort: '80',
         wwwServer: 'angularjs.org',
         builtwithServer: 'builtwith.angularjs.org',
         docsServer: 'docs.angularjs.org',
         codeServer: 'code.angularjs.org',
-        dashboardServer: 'dashboard.angularjs.org'
+        dashboardServer: 'dashboard.angularjs.org',
+        errorsServer: 'errors.angularjs.org',
+        docsPath: 'http://docs.angularjs.org'
       }
     };
 
@@ -70,6 +79,7 @@ module.exports = function (grunt) {
             'server/sample/docs.conf',
             'server/sample/www.conf',
             'server/sample/fastcgi.conf',
+            'server/sample/errors.conf',
             'server/sample/env-config.json'
           ], dest: 'server/config/'
         }]

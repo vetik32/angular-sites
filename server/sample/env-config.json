@@ -3,6 +3,7 @@
     "root" : "http://@@wwwServer:@@wwwPort",
     "code" : "http://@@codeServer:@@codePort",
     "docs" : "http://@@docsServer:@@docsPort",
+    "errors": "http://@@errorsServer:@@errorsPort",
     "builtwith": "http://@@builtwithServer:@@builtwithPort",
     "dashboard": "http://@@dashboardServer:@@dashboardPort",
     "ci" : "http://ci.angularjs.org",
