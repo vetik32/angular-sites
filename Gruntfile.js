@@ -14,7 +14,7 @@ var fs = require('fs')
         'codeServer': 'localhost',
         'dashboardServer': 'localhost',
         'errorsServer': 'localhost',
-        'docsPath': 'http://localhost:8002'
+        'errorDocsPath': 'http://localhost:8002'
       },
       dev: {
         wwwPort: '80',
@@ -29,7 +29,7 @@ var fs = require('fs')
         codeServer: 'dev.code.angularjs.org',
         dashboardServer: 'dev.dashboard.angularjs.org',
         errorsServer: 'dev.errors.angularjs.org',
-        docsPath: 'http://dev.docs.angularjs.org'
+        errorDocsPath: 'http://ci.angularjs.org/job/angular.js-angular-master/lastSuccessfulBuild/artifact/build/docs'
       },
       prod: {
         wwwPort: '80',
@@ -44,7 +44,7 @@ var fs = require('fs')
         codeServer: 'code.angularjs.org',
         dashboardServer: 'dashboard.angularjs.org',
         errorsServer: 'errors.angularjs.org',
-        docsPath: 'http://docs.angularjs.org'
+        errorDocsPath: 'http://ci.angularjs.org/job/angular.js-angular-master/lastSuccessfulBuild/artifact/build/docs'
       }
     };
 
