@@ -5,7 +5,7 @@ describe('code.angularjs.org', function () {
     , HOST = envConfig.urls.code
     , request = require('request')
     , parseXML = require('xml2js').parseString;
-  
+
   describe('Rewrites', function () {
     it('should provide angular js for the version specified at root url', function (done) {
       request(HOST + '/angular-0.10.0.js', function (err, res, body) {
@@ -13,6 +13,13 @@ describe('code.angularjs.org', function () {
         done();
       });
     });
+
+    it('should support urls with letters in them, too', function (done) {
+      request(HOST + '/1.2.0rc1/docs/api', function (err, res, body) {
+        expect(body).toContain('AngularJS is what HTML would have been');
+        done();
+      });
+    })
 
     it('should rewrite wildcard API docs versions to the appropriate index.html', function (done) {
       request(HOST + '/1.1.4/docs/api/ng.directive:ngAnimate', function (err, res, body) {
@@ -28,7 +35,16 @@ describe('code.angularjs.org', function () {
         expect(text).toEqual('v1.1.4 quantum-manipulation');
         done();
       });
-    })
+    });
+
+    it('should render the index when requesting the root of /version/docs/guide', function (done) {
+      tractor.get(HOST + '/1.1.4/docs/guide');
+      var version = tractor.findElement(protractor.By.css('a#version'));
+      version.getText().then(function (text) {
+        expect(text).toEqual('v1.1.4 quantum-manipulation');
+        done();
+      });
+    });
 
     it('should rewrite docs.* to /snapshot/docs/*', function (done) {
       request(envConfig.urls.docs, function (err, res, body) {
@@ -38,7 +54,7 @@ describe('code.angularjs.org', function () {
     });
 
     it('should return the latest docs when requesting /snapshot/docs/api', function (done) {
-      request(HOST + '/snapshot/docs/api', function (err, res, body) { 
+      request(HOST + '/snapshot/docs/api', function (err, res, body) {
         expect(body).toContain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
         done();
       })
