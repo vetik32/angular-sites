@@ -29,7 +29,7 @@ describe('docs.angularjs.org', function () {
         expect(text).toContain('Directives are a way to teach HTML new tricks.');
         done();
       });
-      
+
     });
 
     it('should rewrite /api to index.html', function (done) {
@@ -81,7 +81,7 @@ describe('docs.angularjs.org', function () {
       tractor.get(HOST + '/tutorial');
       var introParagraph = queryCss('.content p');
       introParagraph.getText().then(function (text) {
-        expect(text).toContain('You will need Node.js');
+        expect(text).toContain('A great way to get introduced to AngularJS is to work through this tutorial');
         done();
       });
     });
@@ -139,7 +139,7 @@ describe('docs.angularjs.org', function () {
       });
     });
   })
-  
+
   describe('Crawlability', function () {
 
     it('should return a partial when requesting /?_escaped_fragment_=/api/angular.bind', function (done) {
@@ -182,7 +182,7 @@ describe('docs.angularjs.org', function () {
           done();
         });
       });
-    })    
+    })
 
     it('should return a partial when requesting /api/ng.directive:ngHref?_escaped_fragment_', function (done) {
       request(HOST + '/api/ng.directive:ngHref?_escaped_fragment_', function (err, res, body) {
@@ -267,13 +267,13 @@ describe('docs.angularjs.org', function () {
 
               expect(res.statusCode).toEqual(200);
               expect(body).toContain('API Reference');
-              
+
               if (queueCount === finishedCount) {
                 done();
               }
             });
           });
-        }); 
+        });
       });
     });
   });
@@ -282,9 +282,8 @@ describe('docs.angularjs.org', function () {
     it('should filter the module list when searching', function (done) {
       tractor.get(HOST);
       var search = tractor.findElement(protractor.By.input('search'));
-      
       search.sendKeys('ngBind').then(function () {
-        var firstModule = queryCss('[ng-repeat="page in module.directives"] a')
+        var firstModule = queryCss('[ng-repeat^="page in module.directives"] a');
         firstModule.getText().then(function (text) {
           expect(text).toEqual('ngBind');
           done();

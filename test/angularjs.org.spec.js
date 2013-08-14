@@ -127,7 +127,7 @@ describe('Angularjs.org', function () {
         }, 500);
       });
 
-      it('should open a modal prompting for download configuration', function (done) { 
+      it('should open a modal prompting for download configuration', function (done) {
         queryDoc('#downloadModal').getCssValue('display').then(function (display) {
           expect(display).toEqual('block');
           done();
@@ -137,10 +137,10 @@ describe('Angularjs.org', function () {
       it('should change the CDN url based on user selection of stable or unstable', function (done) {
         var unstableButton = queryDoc("#redPill");
         unstableButton.click().then(function () {
-          
+
           cdnInput.getAttribute('value').then(function (text) {
             unstableVersion = text.split('/').splice(-2,1)[0];
-            
+
             for (i = 0; i < unstableVersion.split('.').length; i++) {
               if (unstableVersion.split('.')[i] > stableVersion.split('.')[i]) {
                 okay = true;
@@ -177,7 +177,7 @@ describe('Angularjs.org', function () {
       it('should have a hoverable region called ng-app', function (done) {
         queryDoc('code.nocode').getText().then(function (text) {
           expect(text).toEqual('ng-app');
-          done();    
+          done();
         });
       });
 
@@ -185,7 +185,7 @@ describe('Angularjs.org', function () {
         queryDoc('code.nocode').click().then(function() {
           queryDoc('.popover').getText().then(function (text) {
             expect(text).toEqual('ng-app\nTells AngularJS to be active in this portion of the page. In this case the entire document.');
-            done();    
+            done();
           });
         });
       });
@@ -211,7 +211,7 @@ describe('Angularjs.org', function () {
           var text = queryDoc('[ng-controller="TodoCtrl"] ul >li:nth-child(2) span');
           text.getAttribute('class').then(function (cls) {
             expect(cls).toEqual('done-true');
-            done();    
+            done();
           });
         });
       });
@@ -225,7 +225,7 @@ describe('Angularjs.org', function () {
               var newItem = queryDoc('[ng-repeat="todo in todos"]:nth-child(3) span');
               newItem.getText().then(function (text) {
                 expect(text).toEqual('Write tests!');
-                done();       
+                done();
               });
             });
           });
