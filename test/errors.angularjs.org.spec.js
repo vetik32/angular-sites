@@ -1,6 +1,6 @@
 var envConfig = require('../server/config/env-config'),
   HOST = envConfig.urls.errors,
-  TARGET = envConfig.urls.docs,
+  TARGET = envConfig.urls.docs.replace(/\:80$/, ''),
   request = require('request');
 
 describe('errors.angularjs.org', function () {
