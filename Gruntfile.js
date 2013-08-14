@@ -29,7 +29,7 @@ var fs = require('fs')
         codeServer: 'dev.code.angularjs.org',
         dashboardServer: 'dev.dashboard.angularjs.org',
         errorsServer: 'dev.errors.angularjs.org',
-        errorDocsPath: 'http://ci.angularjs.org/job/angular.js-angular-master/lastSuccessfulBuild/artifact/build/docs'
+        errorDocsPath: 'http://docs.angularjs.org'
       },
       prod: {
         wwwPort: '80',
@@ -44,13 +44,13 @@ var fs = require('fs')
         codeServer: 'code.angularjs.org',
         dashboardServer: 'dashboard.angularjs.org',
         errorsServer: 'errors.angularjs.org',
-        errorDocsPath: 'http://ci.angularjs.org/job/angular.js-angular-master/lastSuccessfulBuild/artifact/build/docs'
+        errorDocsPath: 'http://docs.angularjs.org'
       }
     };
 
 module.exports = function (grunt) {
   var env = environments[grunt.option('target')] || environments.local;
-  
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     chmod: {
@@ -108,12 +108,12 @@ module.exports = function (grunt) {
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
   });
-  
+
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-chmod');
   grunt.loadTasks('./lib/grunt-contrib-htaccess-to-json');
   grunt.loadTasks('./lib/grunt-server');
-  
+
   grunt.registerTask('configure', ['replace', 'make-snapshot', 'chmod']);
   grunt.registerTask('start', ['nginx:start']);
   grunt.registerTask('stop', ['nginx:stop']);

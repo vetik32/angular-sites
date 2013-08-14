@@ -95,7 +95,7 @@ describe('docs.angularjs.org', function () {
       });
     });
 
-    /*it('should rewrite /error to index.html', function (done) {
+    it('should rewrite /error to index.html', function (done) {
       tractor.get(HOST + '/error');
       var introParagraph = queryCss('.content p');
       introParagraph.getText().then(function (text) {
@@ -111,7 +111,7 @@ describe('docs.angularjs.org', function () {
         expect(text).toContain('Source and destination are identical.');
         done();
       });
-    });*/
+    });
   });
   describe('Bad Deep Urls', function () {
     it('should return 404 for /api/api', function (done) {
