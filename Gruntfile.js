@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         mode: '777',
       },
       snapshot: {
-        src: process.env.USER === 'root' ? ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver'] : []
+        src: process.env.USER === 'root' ? ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver', 'sites/dashboard.angularjs.org/gitFetchSite.php'] : []
       }
     },
     replace: {
