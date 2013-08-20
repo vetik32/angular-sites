@@ -7,7 +7,7 @@
 /components/
 /logs/
 chromedriver.log
-
+selenium/
 env-config.json
-
+libpeerconnection.log
 *.pid
