@@ -1,5 +1,6 @@
 var fs = require('fs')
   , server
+  , exec = require('child_process').exec
   , environments = {
       local: {
         'wwwPort': '8000',
@@ -58,7 +59,7 @@ module.exports = function (grunt) {
         mode: '777',
       },
       snapshot: {
-        src: process.env.USER === 'root' ? ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'components/chromedriver_mac_26.0.1383.0/chromedriver', 'sites/dashboard.angularjs.org/gitFetchSite.php'] : []
+        src: process.env.USER === 'root' ? ['sites/code.angularjs.org/snapshot', 'sites/code.angularjs.org', 'sites/dashboard.angularjs.org/gitFetchSite.php'] : []
       }
     },
     replace: {
@@ -107,6 +108,22 @@ module.exports = function (grunt) {
 
   grunt.registerTask('make-snapshot', function () {
     grunt.file.mkdir('sites/code.angularjs.org/snapshot');
+  });
+
+  grunt.registerTask('install-selenium', function () {
+    var path = require('path').resolve(process.cwd(),
+               'node_modules/protractor/bin/install_selenium_standalone');
+
+    grunt.log.writeln('Installing selenium webdriver standalone and chromedriver');
+    exec(path, this.async());
+  });
+
+  grunt.registerTask('test', function () {
+    var path = require('path').resolve(process.cwd(),
+               'node_modules/.bin/protractor');
+
+    grunt.log.writeln('Running protractor...');
+    exec(path +' protractorConf.js', this.async());
   });
 
   grunt.loadNpmTasks('grunt-replace');

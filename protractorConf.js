@@ -3,11 +3,9 @@ exports.config = {
   // The address of a running selenium server. If this is specified,
   // seleniumServerJar and seleniumPort will be ignored.
   // seleniumAddress: 'http://localhost:4444/wd/hub',
-  seleniumServerJar: './components/selenium-server-standalone-2.33.0/index.jar',
+  seleniumServerJar: './selenium/selenium-server-standalone-2.33.0.jar',
   seleniumPort: 4444,
-  chromeDriver: (process.platform === 'darwin') ?
-    './components/chromedriver_mac_26.0.1383.0/chromedriver' :
-    './components/chromedriver_linux64_26.0.1383.0/chromedriver',
+  chromeDriver: './selenium/chromeDriver',
 
   seleniumArgs: [],
 

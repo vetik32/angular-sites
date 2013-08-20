@@ -9,4 +9,14 @@ describe('dashboard.angularjs.org', function () {
       done();
     });
   });
+
+  it('should fetch the latest source when hitting gitFetchSite.php', function (done) {
+    request(HOST + '/gitFetchSite.php', function (err, res, body) {
+      expect(err).toBeFalsy();
+      expect(body).not.toContain('No input file specified.');
+      expect(body).toContain('Update site from: GitHub master');
+      expect(body).toContain('Author:');
+      done();
+    });
+  });
 });
