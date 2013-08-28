@@ -5,7 +5,7 @@ var request = require('request')
 describe('dashboard.angularjs.org', function () {
   it('Should be online', function (done) {
     request(HOST, function (err, res, body) {
-      expect(body).toContain("AngularJS Dashboard");
+      expect(body).toContain('ng-app="dashboardApp"');
       done();
     });
   });
