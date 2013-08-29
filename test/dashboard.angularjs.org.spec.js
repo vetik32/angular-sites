@@ -18,5 +18,5 @@ describe('dashboard.angularjs.org', function () {
       expect(body).toContain('Author:');
       done();
     });
-  });
+  }, 30000);
 });
