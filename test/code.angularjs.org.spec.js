@@ -59,6 +59,13 @@ describe('code.angularjs.org', function () {
         done();
       })
     });
+
+    it('should only rewrite paths that begin with /angular-x.x.x.js if the pattern is at the start of the string', function (done) {
+      request(HOST + '/1.2.0-rc.2/angular-1.2.0-rc.2.zip', function (err, res, body) {
+        expect(!err).toBe(true);
+        done();
+      });
+    });
   });
 
   describe('Git Update', function () {
