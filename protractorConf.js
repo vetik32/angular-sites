@@ -33,6 +33,7 @@ exports.config = {
     onComplete: null,
     isVerbose: true,
     showColors: true,
-    includeStackTrace: true
+    includeStackTrace: true,
+    defaultTimeoutInterval: 10000
   }
 };
