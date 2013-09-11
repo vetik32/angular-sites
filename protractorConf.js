@@ -19,14 +19,14 @@ exports.config = {
     'browserName': 'chrome'
   },
   specs: [
-    'test/errors.angularjs.org.spec.js',
+    // 'test/errors.angularjs.org.spec.js',
     'test/angularjs.org.spec.js',
-    'test/blog.angularjs.org.spec.js',
-    'test/builtwith.angularjs.org.spec.js',
-    'test/ci.angularjs.org.spec.js',
-    'test/code.angularjs.org.spec.js',
-    'test/dashboard.angularjs.org.spec.js',
-    'test/docs.angularjs.org.spec.js'
+    // 'test/blog.angularjs.org.spec.js',
+    // 'test/builtwith.angularjs.org.spec.js',
+    // 'test/ci.angularjs.org.spec.js',
+    // 'test/code.angularjs.org.spec.js',
+    // 'test/dashboard.angularjs.org.spec.js',
+    // 'test/docs.angularjs.org.spec.js'
   ],
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
