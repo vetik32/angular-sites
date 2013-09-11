@@ -4,7 +4,12 @@ describe('code.angularjs.org', function () {
     , envConfig = require('../server/config/env-config')
     , HOST = envConfig.urls.code
     , request = require('request')
-    , parseXML = require('xml2js').parseString;
+    , parseXML = require('xml2js').parseString
+    , protractorConfig = require('../protractorConf.js');
+
+  request.defaults({
+    timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+  });
 
   describe('Rewrites', function () {
     it('should provide angular js for the version specified at root url', function (done) {

@@ -4,13 +4,17 @@ describe('Angularjs.org', function () {
     , envConfig = require('../server/config/env-config')
     , HOST = envConfig.urls.root
     , request = require('request')
-    , reqTimeout = 5000
-    , queryTimeout = 5000;
+    , protractorConfig = require('../protractorConf.js');
+
+  request.defaults({
+    timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+  });
 
   //Returns a Protractor/WebDriver element promise using CSS query strategy
   var queryDoc = function (query) {
     return tractor.findElement(protractor.By.css(query));
   }
+
 
   describe('php', function () {
     it('should not report errors from greet.php', function (done) {
@@ -20,6 +24,16 @@ describe('Angularjs.org', function () {
       });
     })
   });
+
+
+  describe('Test Timeout', function () {
+    it('should allow 10s before timing out a test', function (done) {
+      setTimeout(function () {
+        done();
+      }, 9900);
+    });
+  });
+
 
   describe('Rewrites', function () {
     it('should execute greet.php', function (done) {

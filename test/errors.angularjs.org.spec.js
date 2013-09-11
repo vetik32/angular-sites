@@ -1,7 +1,12 @@
-var envConfig = require('../server/config/env-config'),
-  HOST = envConfig.urls.errors,
-  TARGET = envConfig.urls.docs.replace(/\:80$/, ''),
-  request = require('request');
+var envConfig = require('../server/config/env-config')
+  , HOST = envConfig.urls.errors
+  , TARGET = envConfig.urls.docs.replace(/\:80$/, '')
+  , request = require('request')
+  , protractorConfig = require('../protractorConf.js');
+
+request.defaults({
+  timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+});
 
 describe('errors.angularjs.org', function () {
   var params = function (url) {

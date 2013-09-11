@@ -5,6 +5,7 @@ exports.config = {
   // seleniumAddress: 'http://localhost:4444/wd/hub',
   seleniumServerJar: './selenium/selenium-server-standalone-2.33.0.jar',
   seleniumPort: 4444,
+
   chromeDriver: './selenium/chromeDriver',
 
   seleniumArgs: [],

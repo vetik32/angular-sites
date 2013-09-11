@@ -1,5 +1,10 @@
 var request = require('request')
-  , HOST = require('../server/config/env-config').urls.ci;
+  , HOST = require('../server/config/env-config').urls.ci
+  , protractorConfig = require('../protractorConf.js');
+
+request.defaults({
+  timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+});
 
 describe('Ci.AngularJS.org', function () {
   describe('Jenkins', function () {

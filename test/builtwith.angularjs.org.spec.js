@@ -3,7 +3,12 @@ describe('builtwith.angularjs.org', function () {
   , envConfig = require('../server/config/env-config')
   , HOST = envConfig.urls.builtwith
   , protractor = require('protractor')
-  , tractor = protractor.getInstance();
+  , tractor = protractor.getInstance()
+  , protractorConfig = require('../protractorConf.js');
+
+  request.defaults({
+    timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+  });
 
   var _beforeAll;
   beforeEach(function () {

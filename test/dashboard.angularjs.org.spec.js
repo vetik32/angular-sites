@@ -1,6 +1,11 @@
 var request = require('request')
   , envConfig = require('../server/config/env-config')
-  , HOST = envConfig.urls.dashboard;
+  , HOST = envConfig.urls.dashboard
+  , protractorConfig = require('../protractorConf.js');
+
+request.defaults({
+  timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+});
 
 describe('dashboard.angularjs.org', function () {
   it('Should be online', function (done) {

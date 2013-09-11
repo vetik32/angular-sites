@@ -1,12 +1,16 @@
 describe('docs.angularjs.org', function () {
   var protractor = require('protractor')
-  , tractor = protractor.getInstance()
-  , envConfig = require('../server/config/env-config')
-  , HOST = envConfig.urls.docs
-  , request = require('request')
-  , parseXML = require('xml2js').parseString
-  , fs = require('fs')
-  , reqTimeout = 5000;
+    , tractor = protractor.getInstance()
+    , envConfig = require('../server/config/env-config')
+    , HOST = envConfig.urls.docs
+    , request = require('request')
+    , parseXML = require('xml2js').parseString
+    , fs = require('fs')
+    , protractorConfig = require('../protractorConf.js');
+
+  request.defaults({
+    timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+  });
 
   function queryCss (selector) {
     return tractor.findElement(protractor.By.css(selector));

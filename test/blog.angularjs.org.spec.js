@@ -1,5 +1,10 @@
 var envConfig
-  , request = require('request');
+  , request = require('request')
+  , protractorConfig = require('../protractorConf.js');
+
+request.defaults({
+  timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
+});
 
 describe('blog.angularjs.org', function () {
   it('should load the blog', function (done) {
