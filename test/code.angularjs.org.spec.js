@@ -11,81 +11,77 @@ describe('code.angularjs.org', function () {
     timeout: protractorConfig.config.jasmineNodeOpts.defaultTimeoutInterval
   });
 
+
   describe('Rewrites', function () {
-    it('should provide angular js for the version specified at root url', function (done) {
+    it('should provide angular js for the version specified at root url', function () {
       request(HOST + '/angular-0.10.0.js', function (err, res, body) {
         expect(body).toContain('AngularJS v0.10.0');
-        done();
       });
     });
 
-    it('should support urls with letters in them, too', function (done) {
+
+    it('should support urls with letters in them, too', function () {
       request(HOST + '/1.2.0rc1/docs/api', function (err, res, body) {
         expect(body).toContain('AngularJS is what HTML would have been');
-        done();
       });
-    })
+    });
 
-    it('should rewrite wildcard API docs versions to the appropriate index.html', function (done) {
+
+    it('should rewrite wildcard API docs versions to the appropriate index.html', function () {
       request(HOST + '/1.1.4/docs/api/ng.directive:ngAnimate', function (err, res, body) {
         expect(body).toContain('AngularJS is what HTML would have been');
-        done();
       });
     });
 
-    it('should render the index when requesting the root of /version/docs', function (done) {
+
+    it('should render the index when requesting the root of /version/docs', function () {
       tractor.get(HOST + '/1.1.4/docs/');
       var version = tractor.findElement(protractor.By.css('a#version'));
-      version.getText().then(function (text) {
-        expect(text).toEqual('v1.1.4 quantum-manipulation');
-        done();
-      });
+
+      expect(version.getText()).toEqual('v1.1.4 quantum-manipulation');
     });
 
-    it('should render the index when requesting the root of /version/docs/guide', function (done) {
+
+    it('should render the index when requesting the root of /version/docs/guide', function () {
       tractor.get(HOST + '/1.1.4/docs/guide');
       var version = tractor.findElement(protractor.By.css('a#version'));
-      version.getText().then(function (text) {
-        expect(text).toEqual('v1.1.4 quantum-manipulation');
-        done();
-      });
+      expect(version.getText()).toEqual('v1.1.4 quantum-manipulation');
     });
 
-    it('should rewrite docs.* to /snapshot/docs/*', function (done) {
+
+    it('should rewrite docs.* to /snapshot/docs/*', function () {
       request(envConfig.urls.docs, function (err, res, body) {
         expect(body).toContain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
-        done();
       });
     });
 
-    it('should return the latest docs when requesting /snapshot/docs/api', function (done) {
+
+    it('should return the latest docs when requesting /snapshot/docs/api', function () {
       request(HOST + '/snapshot/docs/api', function (err, res, body) {
         expect(body).toContain('AngularJS is what HTML would have been, had it been designed for building web-apps.');
-        done();
-      })
+      });
     });
 
-    it('should only rewrite paths that begin with /angular-x.x.x.js if the pattern is at the start of the string', function (done) {
+
+    it('should only rewrite paths that begin with /angular-x.x.x.js if the pattern is at the start of the string', function () {
       request(HOST + '/1.2.0-rc.2/angular-1.2.0-rc.2.zip', function (err, res, body) {
         expect(!err).toBe(true);
-        done();
       });
     });
   });
 
   describe('Git Update', function () {
-    it('should fetch the latest from github when hitting /gitFetchSite.php', function (done) {
+    it('should fetch the latest from github when hitting /gitFetchSite.php', function () {
       request(HOST + '/gitFetchSite.php', function (err, res, body) {
         expect(body).toContain('commit');
         expect(body).toContain('Author:');
         expect(body).toContain('Date:');
-        done();
       });
     });
 
-    it('should match the latest commit from the github master branch', function (done) {
+    it('should match the latest commit from the github master branch', function () {
       request('https://github.com/angular/code.angularjs.org/commits/master.atom', function (err, res, body) {
-        if (err) done(err);
+        if (err) throw err;
 
         parseXML(body, function (err, result) {
           //Get the most recent commit from the Github feed
@@ -96,35 +92,34 @@ describe('code.angularjs.org', function () {
 
           request(HOST + '/gitFetchSite.log', function (err, res, body) {
             expect(body).toContain(commit);
-            done();
           });
         });
       });
     });
   });
 
+
   describe('Directory Listing', function () {
     var link;
 
-    it('should show a list of files when requesting the root', function (done) {
+    it('should show a list of files when requesting the root', function () {
       request(HOST, function (err, res, body) {
         expect(body).toContain('href="0.9.0');
-        done();
       });
     });
 
-    it('should navigate to a directory for a code version', function (done) {
+
+    it('should navigate to a directory for a code version', function () {
       request(HOST + '/0.9.0/', function (err, res, body) {
         expect(body).toContain('angular-0.9.0.js');
-        done();
       });
     });
 
-    it('should render index.html for request to /snapshot/docs', function (done) {
+
+    it('should render index.html for request to /snapshot/docs', function () {
       request(HOST + '/snapshot/docs', function (err, res, body) {
         expect(body).not.toContain('Index of /');
         expect(body).toContain('AngularJS is what HTML would have been');
-        done();
       });
     });
   });

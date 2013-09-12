@@ -8,20 +8,18 @@ request.defaults({
 });
 
 describe('dashboard.angularjs.org', function () {
-  it('Should be online', function (done) {
+  it('Should be online', function () {
     request(HOST, function (err, res, body) {
       expect(body).toContain('ng-app="dashboardApp"');
-      done();
     });
   });
 
-  it('should fetch the latest source when hitting gitFetchSite.php', function (done) {
+  it('should fetch the latest source when hitting gitFetchSite.php', function () {
     request(HOST + '/gitFetchSite.php', function (err, res, body) {
       expect(err).toBeFalsy();
-      expect(body).not.toContain('No input file specified.');
+      expect(body.indexOf('No input file specified.')).toBe(-1);
       expect(body).toContain('Update site from: GitHub master');
       expect(body).toContain('Author:');
-      done();
     });
   }, 30000);
 });
