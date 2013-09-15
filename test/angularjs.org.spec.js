@@ -246,7 +246,7 @@ describe('Angularjs.org', function () {
       });
 
 
-      it('should show the US pluralization of beer', function () {
+      /*it('should show the US pluralization of beer', function () {
         var pluralTabLink = tractor.findElement(protractor.By.css('[module="components-us"] .nav-tabs > li:nth-child(2) a'));
         pluralTabLink.click()
 
@@ -261,7 +261,7 @@ describe('Angularjs.org', function () {
 
         var pluralTab = tractor.findElement(protractor.By.css('[module="components-sk"] [ng-controller="BeerCounter"] > div > ng-pluralize'));
         expect(pluralTab.getText()).toEqual('žiadne pivo');
-      });
+      });*/
     });
 
 
